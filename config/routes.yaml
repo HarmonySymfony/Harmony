@@ -1,0 +1,3 @@
+#index:
+  #path: /favicon.ico
+  #controller: App\Controller\DefaultController::index
