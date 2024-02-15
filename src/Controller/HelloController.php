@@ -15,4 +15,12 @@ class HelloController extends AbstractController
             'controller_name' => 'HelloController',
         ]);
     }
+    #[Route('/hello1', name: 'app_hello1')]
+    public function index1(): Response
+    {
+        return $this->render('hello/index1.html.twig', [
+            'controller_name' => 'HelloController',
+        ]);
+    }
+
 }

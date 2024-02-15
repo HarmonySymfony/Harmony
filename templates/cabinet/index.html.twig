@@ -84,7 +84,39 @@
     <section class="breadcrumbs">
         <div class="container">
 
-          front
+
+
+            <h1>Cabinet index</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Adress</th>
+                    <th>Horaires</th>
+                    <th>Email</th>
+                    <th>Rendezvous</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cabinet in cabinets %}
+                    <tr>
+                        <td>{{ cabinet.id }}</td>
+                        <td>{{ cabinet.adress }}</td>
+                        <td>{{ cabinet.horaires }}</td>
+                        <td>{{ cabinet.email }}</td>
+                        <td>{{ cabinet.rendezvous }}</td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
 
         </div>
     </section><!-- End Breadcrumbs Section -->

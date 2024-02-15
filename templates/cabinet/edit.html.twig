@@ -47,7 +47,7 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="{{path('app_cabinet_index')}}">cabinets</a></li>
+                <li><a class="nav-link scrollto" href="{{path('app_cabinet_liste')}}">cabinets</a></li>
                 <li><a class="nav-link scrollto" href="#pharmacies">pharmacies</a></li>
                 <li><a class="nav-link scrollto" href="#laboratoires">laboratoires</a></li>
                 <li><a class="nav-link scrollto" href="#forum">forum</a></li>
@@ -84,7 +84,18 @@
     <section class="breadcrumbs">
         <div class="container">
 
-          front
+
+
+
+            <h1>Edit Cabinet</h1>
+
+            {{ include('cabinet/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <a href="{{ path('app_cabinet_liste') }}">back to list</a>
+
+            {{ include('cabinet/_delete_form.html.twig') }}
+
+
 
         </div>
     </section><!-- End Breadcrumbs Section -->

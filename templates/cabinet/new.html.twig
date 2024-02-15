@@ -47,7 +47,7 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="{{path('app_cabinet_index')}}">cabinets</a></li>
+                <li><a class="nav-link scrollto" href="{{path('app_cabinet_liste')}}">cabinets</a></li>
                 <li><a class="nav-link scrollto" href="#pharmacies">pharmacies</a></li>
                 <li><a class="nav-link scrollto" href="#laboratoires">laboratoires</a></li>
                 <li><a class="nav-link scrollto" href="#forum">forum</a></li>
@@ -81,10 +81,100 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
+    <style>
+        .custom-form-container {
+            background-color: #b3dcb0;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .label-and-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-label {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .error-container {
+            color: red;
+            font-size: 14px;
+            /* autres styles CSS personnalisés */
+        }
+
+    </style>
     <section class="breadcrumbs">
         <div class="container">
 
-          front
+
+                <h1>Create new Cabinet</h1>
+
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}} )}}
+
+
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.adress, 'adress :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.adress) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.adress) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.horaires, 'horaires :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.horaires) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.horaires) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.email, 'email :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.email) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.rendezvous, 'rendezvous :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.rendezvous) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.rendezvous) }}
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <button class="btn btn-primary rounded-pill py-7 px-4">{{ button_label|default('Save') }}</button>
+
+            {{ form_end(form) }}
+
+
 
         </div>
     </section><!-- End Breadcrumbs Section -->

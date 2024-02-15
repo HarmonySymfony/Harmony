@@ -47,7 +47,7 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="{{path('app_cabinet_index')}}">cabinets</a></li>
+                <li><a class="nav-link scrollto" href="{{path('app_cabinet_liste')}}">cabinets</a></li>
                 <li><a class="nav-link scrollto" href="#pharmacies">pharmacies</a></li>
                 <li><a class="nav-link scrollto" href="#laboratoires">laboratoires</a></li>
                 <li><a class="nav-link scrollto" href="#forum">forum</a></li>
@@ -84,7 +84,47 @@
     <section class="breadcrumbs">
         <div class="container">
 
-          front
+
+
+            {% block body %}
+                <h1>Liste Cabinets</h1>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Adress</th>
+                        <th>Horaires</th>
+                        <th>Email</th>
+                        <th>Rendezvous</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cabinet in cabinets %}
+                        <tr>
+                            <td>{{ cabinet.id }}</td>
+                            <td>{{ cabinet.adress }}</td>
+                            <td>{{ cabinet.horaires }}</td>
+                            <td>{{ cabinet.email }}</td>
+                            <td>{{ cabinet.rendezvous }}</td>
+                            <td>
+                                <a href="{{ path('app_cabinet_show', {'id': cabinet.id}) }}">show</a>
+                                <a href="{{ path('app_cabinet_edit', {'id': cabinet.id}) }}">edit</a>
+                                {{ include('cabinet/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_cabinet_new') }}">Create new</a>
+            {% endblock %}
+
 
         </div>
     </section><!-- End Breadcrumbs Section -->
