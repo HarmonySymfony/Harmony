@@ -22,6 +22,14 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/backoffice', name: 'app_user_backoffice', methods: ['GET'])]
+    public function backoffice(UserRepository $userRepository): Response
+    {
+        return $this->render('hello/backoffice.html.twig', [
+            // 'users' => $userRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
