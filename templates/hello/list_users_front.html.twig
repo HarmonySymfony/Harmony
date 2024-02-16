@@ -46,7 +46,7 @@
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a class="nav-link scrollto " href="{{path('app_user_front_index')}}">Home</a></li>
+        <li><a class="nav-link scrollto " href="#">Home</a></li>
         <li><a class="nav-link scrollto" href="#acabinets">cabinets</a></li>
         <li><a class="nav-link scrollto" href="#pharmacies">pharmacies</a></li>
         <li><a class="nav-link scrollto" href="#laboratoires">laboratoires</a></li>
@@ -84,7 +84,41 @@
   <section class="breadcrumbs">
     <div class="container">
 
-      User surface
+      
+
+            <h1>User index</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Age</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>
+                            
+                           
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+          
 
     </div>
   </section><!-- End Breadcrumbs Section -->

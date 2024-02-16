@@ -14,15 +14,22 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    #[Route('/backoffice/list', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
+    #[Route('/frontoffice/list', name: 'app_user_front_index', methods: ['GET'])]
+    public function frontoffice(UserRepository $userRepository): Response
+    {
+        return $this->render('hello/list_users_front.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
 
-    #[Route('/backoffice', name: 'app_user_backoffice', methods: ['GET'])]
+    #[Route('/backoffice/home', name: 'app_user_backoffice', methods: ['GET'])]
     public function backoffice(UserRepository $userRepository): Response
     {
         return $this->render('hello/backoffice.html.twig', [

@@ -15,4 +15,11 @@ class HelloController extends AbstractController
             'controller_name' => 'HelloController',
         ]);
     }
+    #[Route('/list_users_front', name: 'app_list_users')]
+    public function liste_users_front(): Response
+    {
+        return $this->render('user/liste_users_front.html.twig', [
+            'controller_name' => 'HelloController',
+        ]);
+    }
 }
