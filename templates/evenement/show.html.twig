@@ -1,0 +1,54 @@
+{% extends 'baseFront.html.twig' %}
+
+
+{% block content %}
+	<title>Evenement</title>
+	<h1>{{ evenement.nom }}</h1>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ evenement.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ evenement.nom }}</td>
+			</tr>
+			<tr>
+				<th>DateEvent</th>
+				<td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ evenement.description }}</td>
+			</tr>
+			<tr>
+				<th>Prix</th>
+				<td>{{ evenement.prix }}</td>
+			</tr>
+			<tr>
+				<th>Adress</th>
+				<td>{{ evenement.adress }}</td>
+			</tr>
+			<tr>
+				<th>Longitude</th>
+				<td>{{ evenement.longitude }}</td>
+			</tr>
+			<tr>
+				<th>Latitude</th>
+				<td>{{ evenement.latitude }}</td>
+			</tr>
+
+			<tr>
+				<th>PlaceDispo</th>
+				<td>{{ evenement.PlaceDispo }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_evenement_front') }}">back to list</a>
+
+	{# <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a> #}
+
+
+</div>{% endblock %}

@@ -1,0 +1,56 @@
+
+
+{% extends 'baseBack.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+<title>Evenement index</title>
+    <h1>Evenement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DateEvent</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Adress</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+            
+                <th>PlaceDispo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.id }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.prix }}</td>
+                <td>{{ evenement.adress }}</td>
+                <td>{{ evenement.longitude }}</td>
+                <td>{{ evenement.latitude }}</td>
+                <td>{{ evenement.PlaceDispo }}</td>
+                <td>
+                    {# <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a> #}
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+                
+                    {# <a href="{{ url('app_evenement_delete', {'id': evenement.id}) }}" class="button">delete</a> #}
+                   {{ include('evenement/_delete_form.html.twig') }} 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_new') }}">Create new</a>
+    </div>
+{% endblock %}
