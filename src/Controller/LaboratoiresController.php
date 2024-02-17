@@ -39,7 +39,7 @@ class LaboratoiresController extends AbstractController
         $laboratoire = new Laboratoires();
         $form = $this->createForm(LaboratoiresType::class, $laboratoire);
         $form->handleRequest($request);
-
+        echo "submitting";
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($laboratoire);
             $entityManager->flush();
