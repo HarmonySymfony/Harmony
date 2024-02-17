@@ -46,7 +46,7 @@
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a class="nav-link scrollto " href="#">Home</a></li>
+        <li><a class="nav-link scrollto " href="{{path('app_hello')}}">Home</a></li>
         <li><a class="nav-link scrollto" href="#acabinets">cabinets</a></li>
         <li><a class="nav-link scrollto" href="#pharmacies">pharmacies</a></li>
         <li><a class="nav-link scrollto" href="#laboratoires">laboratoires</a></li>
@@ -86,7 +86,7 @@
 
       
 
-            <h1>User index</h1>
+            <h1>List of Doctors</h1>
 
             <table class="table">
                 <thead>
@@ -95,7 +95,7 @@
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Age</th>
-                    <th>actions</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -149,7 +149,7 @@
         <div class="col-lg-2 col-md-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+            <li><a class="nav-link scrollto " href="{{path('app_hello')}}">Home</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>

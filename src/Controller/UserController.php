@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    
     #[Route('/backoffice/list', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -21,7 +22,7 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-    #[Route('/frontoffice/list', name: 'app_user_front_index', methods: ['GET'])]
+    #[Route('/doctors', name: 'app_user_front_index', methods: ['GET'])]
     public function frontoffice(UserRepository $userRepository): Response
     {
         return $this->render('hello/list_users_front.html.twig', [
@@ -93,4 +94,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }
