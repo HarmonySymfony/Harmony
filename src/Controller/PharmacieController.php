@@ -17,7 +17,7 @@ class PharmacieController extends AbstractController
     #[Route('/', name: 'app_pharmacie_index', methods: ['GET'])]
     public function index(PharmacieRepository $pharmacieRepository): Response
     {
-        return $this->render('pharmacie/index.html.twig', [
+        return $this->render('frontoffice/pharmacie/index.html.twig', [
             'pharmacies' => $pharmacieRepository->findAll(),
         ]);
     }
@@ -36,7 +36,7 @@ class PharmacieController extends AbstractController
             return $this->redirectToRoute('app_pharmacie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('pharmacie/new.html.twig', [
+        return $this->renderForm('frontoffice/pharmacie/new.html.twig', [
             'pharmacie' => $pharmacie,
             'form' => $form,
         ]);
@@ -45,7 +45,7 @@ class PharmacieController extends AbstractController
     #[Route('/{id}', name: 'app_pharmacie_show', methods: ['GET'])]
     public function show(Pharmacie $pharmacie): Response
     {
-        return $this->render('pharmacie/show.html.twig', [
+        return $this->render('frontoffice/pharmacie/show.html.twig', [
             'pharmacie' => $pharmacie,
         ]);
     }
@@ -62,7 +62,7 @@ class PharmacieController extends AbstractController
             return $this->redirectToRoute('app_pharmacie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('pharmacie/edit.html.twig', [
+        return $this->renderForm('frontoffice/pharmacie/edit.html.twig', [
             'pharmacie' => $pharmacie,
             'form' => $form,
         ]);
