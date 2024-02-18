@@ -20,10 +20,10 @@ class Laboratoires
     private ?string $emplacement = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $idU = null;
+    private ?int $idU = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $idL = null;
+    private ?int $idL = null;
 
     public function getId(): ?int
     {
@@ -54,24 +54,24 @@ class Laboratoires
         return $this;
     }
 
-    public function getIdU(): ?string
+    public function getIdU(): ?int
     {
         return $this->idU;
     }
 
-    public function setIdU(string $idU): static
+    public function setIdU(int $idU): static
     {
         $this->idU = $idU;
 
         return $this;
     }
 
-    public function getIdL(): ?string
+    public function getIdL(): ?int
     {
         return $this->idL;
     }
 
-    public function setIdL(string $idL): static
+    public function setIdL(int $idL): static
     {
         $this->idL = $idL;
 

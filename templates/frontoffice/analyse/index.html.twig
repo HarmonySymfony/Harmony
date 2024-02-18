@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analyse index{% endblock %}
+
+{% block body %}
+    <h1>Analyse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for analyse in analyses %}
+            <tr>
+                <td>{{ analyse.id }}</td>
+                <td>{{ analyse.type }}</td>
+                <td>{{ analyse.prix }}</td>
+                <td>
+                    <a href="{{ path('app_analyse_show', {'id': analyse.id}) }}">show</a>
+                    <a href="{{ path('app_analyse_edit', {'id': analyse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_analyse_new') }}">Create new</a>
+{% endblock %}
