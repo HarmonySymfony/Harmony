@@ -15,30 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     
-    #[Route('/backoffice/list', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/login', name: 'app_user_login', methods: ['GET'])]
+    public function login(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-    #[Route('/doctors', name: 'app_user_front_index', methods: ['GET'])]
-    public function frontoffice(UserRepository $userRepository): Response
-    {
-        return $this->render('hello/list_users_front.html.twig', [
-            'users' => $userRepository->findAll(),
+        return $this->render('backoffice/user/login.html.twig', [
+//            'users' => $userRepository->findAll(),
         ]);
     }
 
-    #[Route('/backoffice/home', name: 'app_user_backoffice', methods: ['GET'])]
-    public function backoffice(UserRepository $userRepository): Response
-    {
-        return $this->render('hello/backoffice.html.twig', [
-            // 'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    #[Route('/signup', name: 'app_user_signup', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -52,16 +37,50 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/new.html.twig', [
+        return $this->renderForm('backoffice/user/signup.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
 
+    #[Route('/backoffice', name: 'app_user_backoffice_dashboard', methods: ['GET'])]
+    public function backoffice_dashboard(UserRepository $userRepository): Response
+    {
+        return $this->render('backoffice/user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/backoffice/list', name: 'app_user_index', methods: ['GET'])]
+    public function index(UserRepository $userRepository): Response
+    {
+        return $this->render('backoffice/user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/doctors', name: 'app_user_front_index', methods: ['GET'])]
+    public function frontoffice(UserRepository $userRepository): Response
+    {
+        return $this->render('backoffice/user/list_users_front.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/backoffice/home', name: 'app_user_backoffice', methods: ['GET'])]
+    public function backoffice(UserRepository $userRepository): Response
+    {
+        return $this->render('frontoffice/backoffice.html.twig', [
+            // 'users' => $userRepository->findAll(),
+        ]);
+    }
+
+
+
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('backoffice/user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -78,7 +97,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->renderForm('backoffice/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

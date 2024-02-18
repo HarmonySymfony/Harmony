@@ -11,7 +11,7 @@ class HelloController extends AbstractController
     #[Route('/home', name: 'app_hello')]
     public function index(): Response
     {
-        return $this->render('hello/index.html.twig', [
+        return $this->render('frontoffice/index.html.twig', [
             'controller_name' => 'HelloController',
         ]);
     }

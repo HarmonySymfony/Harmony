@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('app_user_backoffice') }}">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -376,40 +376,34 @@
                         <div class="container">
 
 
-            <h1>User index</h1>
+            <h1>User</h1>
 
             <table class="table">
-                <thead>
+                <tbody>
                 <tr>
                     <th>Id</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Age</th>
-                    <th>actions</th>
+                    <td>{{ user.id }}</td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.nom }}</td>
-                        <td>{{ user.prenom }}</td>
-                        <td>{{ user.age }}</td>
-                        <td>
-                            <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                            <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                            {{ include('user/_delete_form.html.twig') }}
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="5">no records found</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ user.age }}</td>
+                </tr>
                 </tbody>
             </table>
 
-            <a href="{{ path('app_user_new') }}">Create new</a>
+            <a href="{{ path('app_user_index') }}">back to list</a>
+
+            <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+            {{ include('backoffice/user/_delete_form.html.twig') }}
 
 
 
