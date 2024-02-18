@@ -13,53 +13,152 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 20)]
+    private ?string $username = null;
+
+    #[ORM\Column(length: 32)]
+    private ?string $password = null;
+
+    #[ORM\Column(length: 32)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 12)]
+    private ?string $role = null;
+
+    #[ORM\Column(length: 12, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 12)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $age = null;
+    #[ORM\Column]
+    private ?int $age = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setNom(?string $nom): static
+    /**
+     * @param string|null $nom
+     */
+    public function setNom(?string $nom): void
     {
         $this->nom = $nom;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    /**
+     * @param string|null $prenom
+     */
+    public function setPrenom(?string $prenom): void
     {
         $this->prenom = $prenom;
-
-        return $this;
     }
 
-    public function getAge(): ?string
+    /**
+     * @return int|null
+     */
+    public function getAge(): ?int
     {
         return $this->age;
     }
 
-    public function setAge(string $age): static
+    /**
+     * @param int|null $age
+     */
+    public function setAge(?int $age): void
     {
         $this->age = $age;
+    }
 
-        return $this;
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string|null $username
+     */
+    public function setUsername(?string $username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string|null $password
+     */
+    public function setPassword(?string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string|null $role
+     */
+    public function setRole(?string $role): void
+    {
+        $this->role = $role;
     }
 }
