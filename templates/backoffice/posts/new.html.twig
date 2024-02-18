@@ -1,0 +1,14 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}New Posts{% endblock %}
+
+{% block body %}
+    <div style="padding-left: 10px;padding-top: 100px" class="container">
+
+        <h1>Create new Posts</h1>
+
+        {{ include('backoffice/posts/_form.html.twig') }}
+
+        <a href="{{ path('app_posts_index') }}">back to list</a>
+    </div>
+{% endblock %}

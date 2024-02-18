@@ -4,33 +4,26 @@ namespace App\Entity;
 
 use App\Repository\PostsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-
- #[ORM\Entity(repositoryClass: PostsRepository::class)]
- #[ORM\HasLifecycleCallbacks]
- 
-
+#[ORM\Entity(repositoryClass: PostsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Posts
 {
-    
-      #[ORM\Id]
-      #[ORM\GeneratedValue(strategy:"AUTO")]
-      #[ORM\Column(type:"integer")]
-     
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(type: "integer")]
     private ?int $id;
 
-    #[ORM\Column(type:"text")]
-
+    #[ORM\Column(type: "text")]
+    #[Assert\Length(min: 5, max: 255)]
     private ?string $contenu;
 
-    
-      #[ORM\Column(type: "datetime")]
-     
+    #[ORM\Column(type: "datetime")]
     private \DateTimeInterface $date_creation;
 
-         #[ORM\ManyToOne(targetEntity: User::class)]
-      #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id")]
-     
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     private ?User $user;
 
     public function getId(): ?int
@@ -65,9 +58,7 @@ class Posts
         return $this->user;
     }
 
-    
-      #[ORM\PrePersist]
-     
+    #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
         $this->date_creation = new \DateTime();

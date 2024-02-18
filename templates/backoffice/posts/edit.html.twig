@@ -1,0 +1,15 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Edit Posts{% endblock %}
+
+{% block body %}
+    <div style="padding-left: 10px;padding-top 100px" class="container">
+
+    <h1>Edit Posts</h1>
+
+    {{ include('backoffice/posts/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_posts_index') }}">back to list</a>
+
+    {{ include('backoffice/posts/_delete_form.html.twig') }}
+{% endblock %}

@@ -17,7 +17,7 @@ class PostsController extends AbstractController
     #[Route('/', name: 'app_posts_index', methods: ['GET'])]
     public function index(PostsRepository $postsRepository): Response
     {
-        return $this->render('posts/index.html.twig', [
+        return $this->render('backoffice/posts/index.html.twig', [
             'posts' => $postsRepository->findAll(),
         ]);
     }
@@ -36,7 +36,7 @@ class PostsController extends AbstractController
             return $this->redirectToRoute('app_posts_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('posts/new.html.twig', [
+        return $this->renderForm('backoffice/posts/new.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);
@@ -45,7 +45,7 @@ class PostsController extends AbstractController
     #[Route('/{id}', name: 'app_posts_show', methods: ['GET'])]
     public function show(Posts $post): Response
     {
-        return $this->render('posts/show.html.twig', [
+        return $this->render('backoffice/posts/show.html.twig', [
             'post' => $post,
         ]);
     }
@@ -62,7 +62,7 @@ class PostsController extends AbstractController
             return $this->redirectToRoute('app_posts_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('posts/edit.html.twig', [
+        return $this->renderForm('backoffice/posts/edit.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);

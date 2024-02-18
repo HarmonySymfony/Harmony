@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.backoffice.html.twig' %}
 
 {% block title %}Posts index{% endblock %}
 
 {% block body %}
+    <div style="padding-left: 10px;padding-top 100px" class="container">
+
     <h1>Posts index</h1>
 
     <table class="table">
@@ -34,4 +36,5 @@
     </table>
 
     <a href="{{ path('app_posts_new') }}">Create new</a>
+    </div>
 {% endblock %}
