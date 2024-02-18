@@ -1,0 +1,15 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+
+
+    <h1>Create new Laboratoire</h1>
+    {{ include('backoffice/laboratoires/_form.html.twig') }}
+
+    <a href="{{ path('app_laboratoires_index') }}">back to list</a>
+
+
+</div>
+{% endblock %}

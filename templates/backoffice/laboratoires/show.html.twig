@@ -1,0 +1,39 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+
+<h1>Laboratoires</h1>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ laboratoire.id }}</td>
+    </tr>
+    <tr>
+        <th>Nom</th>
+        <td>{{ laboratoire.nom }}</td>
+    </tr>
+    <tr>
+        <th>Emplacement</th>
+        <td>{{ laboratoire.emplacement }}</td>
+    </tr>
+    <tr>
+        <th>IdU</th>
+        <td>{{ laboratoire.idU }}</td>
+    </tr>
+    <tr>
+        <th>IdL</th>
+        <td>{{ laboratoire.idL }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="{{ path('app_laboratoires_index') }}">back to list</a>
+
+<a href="{{ path('app_laboratoires_edit', {'id': laboratoire.id}) }}">edit</a>
+
+{{ include('backoffice/laboratoires/_delete_form.html.twig') }}
+
+
+{% endblock %}
