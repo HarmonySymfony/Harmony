@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pharmacie{% endblock %}
+
+{% block body %}
+<div style="padding-top: 200px" class="container">
+
+    <h1>Pharmacie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pharmacie.id }}</td>
+            </tr>
+            <tr>
+                <th>IdU</th>
+                <td>{{ pharmacie.idU }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ pharmacie.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ pharmacie.adress }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ pharmacie.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pharmacie_index') }}">back to list</a>
+
+    <a href="{{ path('app_pharmacie_edit', {'id': pharmacie.id}) }}">edit</a>
+
+    {{ include('pharmacie/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
