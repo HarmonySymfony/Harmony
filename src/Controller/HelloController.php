@@ -15,4 +15,11 @@ class HelloController extends AbstractController
             'controller_name' => 'HelloController',
         ]);
     }
+    #[Route('/hello1', name: 'app_hello1')]
+    public function backoffice(): Response
+    {
+        return $this->render('hello/backoffice.html.twig', [
+            'controller_name' => 'HelloController',
+        ]);
+    }
 }
