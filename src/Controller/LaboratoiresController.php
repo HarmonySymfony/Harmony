@@ -17,17 +17,7 @@ class LaboratoiresController extends AbstractController
     #[Route('/', name: 'app_laboratoires_index', methods: ['GET'])]
     public function index(LaboratoiresRepository $laboratoiresRepository): Response
     {
-        return $this->render('laboratoires/index.html.twig', [
-            'laboratoires' => $laboratoiresRepository->findAll(),
-        ]);
-    }
-
-
-
-    #[Route('/listeee', name: 'app_liste_laboratoires_index', methods: ['GET'])]
-    public function frontoffice(LaboratoiresRepository $laboratoiresRepository): Response
-    {
-        return $this->render('hello/list_lab.html.twig', [
+        return $this->render('backoffice/laboratoires/index.html.twig', [
             'laboratoires' => $laboratoiresRepository->findAll(),
         ]);
     }
@@ -47,7 +37,7 @@ class LaboratoiresController extends AbstractController
             return $this->redirectToRoute('app_laboratoires_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('laboratoires/new.html.twig', [
+        return $this->renderForm('backoffice/laboratoires/new.html.twig', [
             'laboratoire' => $laboratoire,
             'form' => $form,
         ]);
@@ -56,7 +46,7 @@ class LaboratoiresController extends AbstractController
     #[Route('/{id}', name: 'app_laboratoires_show', methods: ['GET'])]
     public function show(Laboratoires $laboratoire): Response
     {
-        return $this->render('laboratoires/show.html.twig', [
+        return $this->render('backoffice/laboratoires/show.html.twig', [
             'laboratoire' => $laboratoire,
         ]);
     }
@@ -73,7 +63,7 @@ class LaboratoiresController extends AbstractController
             return $this->redirectToRoute('app_laboratoires_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('laboratoires/edit.html.twig', [
+        return $this->renderForm('backoffice/laboratoires/edit.html.twig', [
             'laboratoire' => $laboratoire,
             'form' => $form,
         ]);
