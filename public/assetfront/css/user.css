@@ -1,0 +1,20 @@
+.dashboard-link {
+    text-decoration: none; /* Remove default underline */
+  }
+  
+  #dashboard-button {
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+  
+  #dashboard-button:hover {
+    transform: scale(1.1); /* Zoom in by 10% */
+  }
+  
+  .dashboard-link:hover #dashboard-button {
+    transform: scale(1.1); /* Zoom in by 10% */
+  }
+  
+  .dashboard-link:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  

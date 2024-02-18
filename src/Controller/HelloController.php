@@ -8,10 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
-    #[Route('/hello', name: 'app_hello')]
+    #[Route('/home', name: 'app_hello')]
     public function index(): Response
     {
-        return $this->render('hello/index.html.twig', [
+        return $this->render('frontoffice/index.html.twig', [
+            'controller_name' => 'HelloController',
+        ]);
+    }
+    #[Route('/list_users_front', name: 'app_list_users')]
+    public function liste_users_front(): Response
+    {
+        return $this->render('user/liste_users_front.html.twig', [
             'controller_name' => 'HelloController',
         ]);
     }
