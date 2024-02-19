@@ -1,10 +1,7 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'base.backoffice.html.twig' %}
 
 {% block body %}
-    <div style="padding-top: 200px" class="container">
         <h1>Create new User</h1>
         {{ include('backoffice/user/_form.html.twig') }}
         <a href="{{ path('app_user_login') }}" class="btn btn-secondary">Back to Login</a>
-    </div>
 {% endblock %}
