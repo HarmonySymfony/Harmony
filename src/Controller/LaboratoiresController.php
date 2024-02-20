@@ -22,6 +22,16 @@ class LaboratoiresController extends AbstractController
         ]);
     }
 
+    
+    #[Route('/front', name: 'app_laboratoires_front_index', methods: ['GET'])]
+    public function labofront(LaboratoiresRepository $laboratoiresRepository): Response
+    {
+        return $this->render('frontoffice/laboratoires/index.html.twig', [
+            'laboratoires' => $laboratoiresRepository->findAll(),
+        ]);
+    }
+
+
 
     #[Route('/new', name: 'app_laboratoires_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
