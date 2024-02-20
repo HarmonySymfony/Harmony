@@ -1,0 +1,43 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+    <div style="padding-left: 10px; padding-top: 200px" class="container">
+        <h1>Pharmacie List</h1>
+        
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>IdU</th>
+                        <th>Nom</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pharmacie in pharmacies %}
+                        <tr>
+                            <td>{{ pharmacie.id }}</td>
+                            <td>{{ pharmacie.idU }}</td>
+                            <td>{{ pharmacie.nom }}</td>
+                            <td>{{ pharmacie.adress }}</td>
+                            <td>{{ pharmacie.type }}</td>
+                            <td>
+                                <a href="{{ path('app_pharmacie_show_backoffice', {'id': pharmacie.id}) }}">Show</a>
+                                <a href="{{ path('app_pharmacie_edit_backoffice', {'id': pharmacie.id}) }}">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('app_pharmacie_new_backoffice') }}" class="btn btn-primary">Create new</a>
+    </div>
+{% endblock %}

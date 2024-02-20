@@ -1,0 +1,15 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Edit Pharmacie{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-left: 200px; padding-top: 200px">
+        <h1>Edit Pharmacie</h1>
+
+        {{ include('backoffice/pharmacie/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_pharmacie_backoffice_index') }}" class="btn btn-secondary">Back to List</a>
+
+        {{ include('backoffice/pharmacie/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

@@ -22,6 +22,10 @@
     <link href={{asset('assetfront/css/user.css')}} rel="stylesheet">
 
 </head>
+<head>
+    <!-- ... autres balises head ... -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
 
 <body id="page-top">
 
@@ -64,11 +68,7 @@
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Users</span>
             </a>
-            <a class="nav-link collapsed" href="{{ path('app_laboratoires_index') }}" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Laboratories</span>
-            </a>
+            
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
@@ -107,10 +107,10 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed" href="{{path('app_pharmacie_backoffice_index')}}" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+                <span>pharmacie</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">

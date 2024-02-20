@@ -1,0 +1,14 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}New Pharmacie{% endblock %}
+
+{% block body %}
+<div style="padding-left: 100px;padding-top: 200px" class="container">
+
+    <h1>Create new Pharmacie</h1>
+
+    {{ include('backoffice/pharmacie/_form.html.twig') }}
+
+    <a href="{{ path('app_pharmacie_backoffice_index') }}">back to list</a>
+</div>
+{% endblock %}

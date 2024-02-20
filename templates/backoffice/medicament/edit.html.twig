@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Medicament{% endblock %}
+
+{% block body %}
+    <h1>Edit Medicament</h1>
+    <div style="padding-left: 200px;padding-top: 200px" class="container">
+
+
+    {{ include('frontoffice/medicament/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_medicament_index') }}">back to list</a>
+
+    {{ include('frontoffice/medicament/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
