@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PharmacieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PharmacieRepository::class)]
 class Pharmacie
@@ -17,12 +18,15 @@ class Pharmacie
     private ?string $idU = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom ne peut pas être vide.")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"L'adresse ne peut pas être vide.")]
     private ?string $adress = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le type ne peut pas être vide.")]
     private ?string $type = null;
 
     public function getId(): ?int
