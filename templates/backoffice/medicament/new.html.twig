@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.backoffice.html.twig' %}
 
 {% block title %}New Medicament{% endblock %}
 
@@ -7,8 +7,8 @@
 
     <h1>Create new Medicament</h1>
 
-    {{ include('frontoffice/medicament/_form.html.twig') }}
+    {{ include('backoffice/medicament/_form.html.twig') }}
 
-    <a href="{{ path('app_medicament_index') }}">back to list</a>
+   
     </div>
 {% endblock %}

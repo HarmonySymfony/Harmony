@@ -133,7 +133,7 @@ class PharmacieController extends AbstractController
         return $this->redirectToRoute('app_pharmacie_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'app_pharmacie_delete_backoffice', methods: ['POST'])]
+    #[Route('/{id}/delte_backoffice', name: 'app_pharmacie_delete_backoffice', methods: ['POST'])]
     public function delete_backoffice(Request $request, Pharmacie $pharmacie, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pharmacie->getId(), $request->request->get('_token'))) {

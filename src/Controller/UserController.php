@@ -76,7 +76,7 @@ class UserController extends AbstractController
                     return $this->redirectToRoute('app_user_backoffice_dashboard');
                 } elseif ('PHAMACIEN' == $user->getRole()) {
                     $this->logger->debug('User authenticated as pharmacies');
-                    return $this->redirectToRoute('app_user_backoffice_dashboard');
+                    return $this->redirectToRoute('app_pharmacie_index');
                 } elseif ('PATIENT' == $user->getRole()) {
                     $this->logger->debug('User authenticated as patient');
                     return $this->redirectToRoute('app_user_backoffice_dashboard');

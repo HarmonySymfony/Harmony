@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MedicamentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MedicamentRepository::class)]
 class Medicament
@@ -14,18 +15,24 @@ class Medicament
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La référence ne peut pas être vide.")]
     private ?string $reference = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le stock ne peut pas être vide.")]
     private ?string $stock = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La disponibilité ne peut pas être vide.")]
     private ?string $disponibilite = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La description ne peut pas être vide.")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le prix ne peut pas être vide.")]
+    #[Assert\Type(type:"numeric", message:"Le prix doit être un nombre.")]
     private ?string $prix = null;
 
     public function getId(): ?int

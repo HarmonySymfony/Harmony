@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.backoffice.html.twig' %}
 
 {% block title %}Medicament{% endblock %}
 
@@ -35,10 +35,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_medicament_index') }}">back to list</a>
+    <a href="{{ path('app_medicament_index_backoffice') }}">back to list</a>
 
-    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}">edit</a>
+    <a href="{{ path('app_medicament_edit_backoffice', {'id': medicament.id}) }}">edit</a>
 
-    {{ include('medicament/_delete_form.html.twig') }}
+    {{ include('backoffice/medicament/_delete_form.html.twig') }}
     </div>    
 {% endblock %}
