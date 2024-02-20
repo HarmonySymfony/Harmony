@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AnalyseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,9 +15,12 @@ class Analyse
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "le nom est obligatoire") ]   
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message:"le prix est obligatoire")]
+    #[Assert\Positive (message : "le prix est positif") ]  
     private ?float $prix = null;
 
     public function getId(): ?int

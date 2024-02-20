@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\LaboratoiresRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,15 +15,20 @@ class Laboratoires
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "le nom est obligatoire") ]  
+    #[Assert\Regex(pattern: '/^[a-zA-Z]{3,}$/', message: 'Le nom doit contenir au moins 3 caracteres alphabetiques')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "l/'emplacement est obligatoire") ]  
     private ?string $emplacement = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "idu est obligatoire") ]  
     private ?int $idU = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "idL est obligatoire") ]  
     private ?int $idL = null;
 
     public function getId(): ?int
