@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="padding-top: 200px" class="container">
+        <h1>Welcome to Our Website!</h1>
+        <p>This is the home page of our website. Feel free to explore and learn more about what we have to offer.</p>
+        <p>Here are some quick links to get you started:</p>
+        <ul>
+            <li><a href="{{path('app_hello')}}">About Us</a></li>
+            <li><a href="{{path('app_hello')}}">Contact Us</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </div>
+{% endblock %}
+
+
