@@ -5,28 +5,57 @@
 {% block body %}
     <div style="padding-left: 10px;padding-top 100px" class="container">
 
-    <h1>Posts</h1>
+    <h1>Détails</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ post.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Date_creation</th>
-                <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ post.id }}</td>
+                </tr>
+                <tr>
+                    <th>Contenu</th>
+                    <td>{{ post.contenu }}</td>
+                </tr>
+                <tr>
+                    <th>Publiée par</th>
+                    <td>
+                        {% if post.postedAs =='Anonyme' %}
+                            Anonyme
+                        {% else %}
+                            {{ post.user.username }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID User</th>
+                    <td>
+                        {{ post.user.id }}
+{#                        do like this for Frontoffice#}
+{#                        {% if post.postedAs =='Anonyme' %}#}
+{#                            Anonyme#}
+{#                        {% else %}#}
+{#                            {{ post.user.id }}#}
+{#                        {% endif %}#}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date_creation</th>
+                    <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_posts_index') }}">back to list</a>
-
-    <a href="{{ path('app_posts_edit', {'id': post.id}) }}">edit</a>
-
-    {{ include('backoffice/posts/_delete_form.html.twig') }}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{ include('backoffice/posts/_delete_form.html.twig') }}
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

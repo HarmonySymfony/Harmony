@@ -71,11 +71,18 @@ class PostsController extends AbstractController
     #[Route('/{id}', name: 'app_posts_delete', methods: ['POST'])]
     public function delete(Request $request, Posts $post, EntityManagerInterface $entityManager): Response
     {
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            // Delete the post
             $entityManager->remove($post);
             $entityManager->flush();
+
+            // Redirect to the index page after deletion
+            return $this->redirectToRoute('app_posts_index');
         }
 
-        return $this->redirectToRoute('app_posts_index', [], Response::HTTP_SEE_OTHER);
+        // If CSRF token is invalid, handle the error (e.g., show an error message)
+        // Redirect to the index page or display an error message
+        return $this->redirectToRoute('app_posts_index');
     }
 }

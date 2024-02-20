@@ -1,40 +1,46 @@
 {% extends 'base.backoffice.html.twig' %}
 
-{% block title %}Posts index{% endblock %}
+{% block title %}Posts Index{% endblock %}
 
 {% block body %}
-    <div style="padding-left: 10px;padding-top 100px" class="container">
+    <div class="container" style="padding-top: 50px;">
+        <h1>Liste des publications</h1>
 
-    <h1>Posts index</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Publié par</th>
+                <th>Publication</th>
+                <th>Date de Publication</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>
+                        {% if post.postedAs =='Anonyme' %}
+                            Anonyme
+                        {% else %}
+                            {{ post.user.username }}
+                        {% endif %}
+                    </td>
+                    <td>{{ post.contenu }}</td>
+                    <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td><a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
+                    <td><a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
+                    <td>{{ include('backoffice/posts/_delete_form.html.twig') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Contenu</th>
-                <th>Date_creation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.contenu }}</td>
-                <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_posts_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('app_posts_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_posts_new') }}">Create new</a>
+        <a href="{{ path('app_posts_new') }}" class="btn btn-success">Publier une nouvelle question</a>
     </div>
 {% endblock %}
