@@ -13,10 +13,11 @@ use Doctrine\ORM\EntityManagerInterface;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(): Response
+    public function index(UtilisateurRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('frontoffice/user/index.html.twig', [
             'controller_name' => 'UserController',
+            'users' => $userRepository->findAll(),
         ]);
     }
     #[Route('/backoffice', name: 'app_utilisateur_backoffice_dashboard', methods: ['GET'])]
