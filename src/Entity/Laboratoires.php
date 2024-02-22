@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\LaboratoiresRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,16 +15,21 @@ class Laboratoires
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "le nom est obligatoire") ]  
+    #[Assert\Regex(pattern: '/^[a-zA-Z]{3,}$/', message: 'Le nom doit contenir au moins 3 caracteres alphabetiques')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "l/'emplacement est obligatoire") ]  
     private ?string $emplacement = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $idU = null;
+    #[Assert\NotBlank (message : "idu est obligatoire") ]  
+    private ?int $idU = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $idL = null;
+    #[Assert\NotBlank (message : "idL est obligatoire") ]  
+    private ?int $idL = null;
 
     public function getId(): ?int
     {
@@ -54,24 +60,24 @@ class Laboratoires
         return $this;
     }
 
-    public function getIdU(): ?string
+    public function getIdU(): ?int
     {
         return $this->idU;
     }
 
-    public function setIdU(string $idU): static
+    public function setIdU(int $idU): static
     {
         $this->idU = $idU;
 
         return $this;
     }
 
-    public function getIdL(): ?string
+    public function getIdL(): ?int
     {
         return $this->idL;
     }
 
-    public function setIdL(string $idL): static
+    public function setIdL(int $idL): static
     {
         $this->idL = $idL;
 
