@@ -1,4 +1,4 @@
-{% extends 'base.backoffice.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Edit Posts{% endblock %}
 
@@ -10,14 +10,14 @@
         <table class="table">
             <tbody>
                 <tr>
-                    {{ include('backoffice/posts/_form.html.twig', {'button_label': 'Confirmer'}) }}
+                    {{ include('frontoffice/posts/_form.html.twig', {'button_label': 'Confirmer'}) }}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
+                    <a href="{{ path('app_posts_index_F') }}" class="btn btn-primary">Retour à la liste</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {{ include('backoffice/posts/_delete_form.html.twig') }}
+                    {{ include('frontoffice/posts/_delete_form.html.twig') }}
                 </tr>
             </tbody>
         </table>

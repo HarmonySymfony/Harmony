@@ -1,4 +1,4 @@
-{% extends 'base.backoffice.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}New Posts{% endblock %}
 
@@ -7,13 +7,13 @@
 
         <h1>Créer nouvelle publication</h1>
 
-        {{ include('backoffice/posts/_form.html.twig', {'button_label': 'Confirmer'}) }}
+        {{ include('frontoffice/posts/_form.html.twig', {'button_label': 'Confirmer'}) }}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
+        <a href="{{ path('app_posts_index_F') }}" class="btn btn-primary">Retour à la liste</a>
 
     </div>
 

@@ -17,7 +17,7 @@ class Posts
 
     #[ORM\Column(type: "text")]
     #[Assert\NotBlank(message: 'Le contenu ne peut pas être vide')]
-    #[Assert\Regex(pattern: '/^[a-zA-Z0-9_\s!?.]*$/', message: 'Seules les lettres, les chiffres,
+    #[Assert\Regex(pattern: '/^[a-zA-Z0-9_\s!?.;:]*$/', message: 'Seules les lettres, les chiffres,
      les traits de soulignement et les espaces sont autorisés.')]
     private string $contenu;
 
@@ -27,10 +27,9 @@ class Posts
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $last_modification;
 
-
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
-    private User $user;
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: "utilisateur_id", referencedColumnName: "id")]
+    private Utilisateur $utilisateur;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le  ne peut pas être vide')]
@@ -57,11 +56,11 @@ class Posts
     {
         $this->date_creation = new \DateTime();
     }
+
     public function getDateCreation(): ?\DateTimeInterface
     {
         return $this->date_creation;
     }
-
 
     #[ORM\PreUpdate]
     public function setModifiedValue(): void
@@ -74,17 +73,15 @@ class Posts
         return $this->last_modification;
     }
 
-
-
-    public function setUser(?User $user): self
+    public function getUtilisateur(): ?Utilisateur
     {
-        $this->user = $user;
-        return $this;
+        return $this->utilisateur;
     }
 
-    public function getUser(): ?User
+    public function setUtilisateur(?Utilisateur $utilisateur): self
     {
-        return $this->user;
+        $this->utilisateur = $utilisateur;
+        return $this;
     }
 
     public function getPostedAs(): ?string
@@ -95,7 +92,6 @@ class Posts
     public function setPostedAs(string $postedAs): static
     {
         $this->postedAs = $postedAs;
-
         return $this;
     }
 }

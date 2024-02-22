@@ -1,4 +1,4 @@
-{% extends 'base.backoffice.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Posts{% endblock %}
 
@@ -51,9 +51,9 @@
             <tbody>
                 <tr>
                     <div style="text-align: center;">
-                        <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{ path('app_posts_edit_F', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
+                        <a href="{{ path('app_posts_index_F') }}" class="btn btn-primary">Retour à la liste</a>
                     </div>
 
                 </tr>

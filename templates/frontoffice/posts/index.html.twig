@@ -1,4 +1,4 @@
-{% extends 'base.backoffice.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Posts Index{% endblock %}
 
@@ -25,9 +25,9 @@
                     <td style="width: 500px; word-wrap: break-word; white-space: pre-wrap;">{{ post.contenu }}</td>
                     <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
-                    <td><a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
-                    <td><a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
-                    <td>{{ include('backoffice/posts/_delete_form.html.twig') }}</td>
+                    <td><a href="{{ path('app_posts_show_F', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
+                    <td><a href="{{ path('app_posts_edit_F', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
+                    <td>{{ include('frontoffice/posts/_delete_form.html.twig') }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -38,7 +38,7 @@
         </table>
 
         <div style="text-align: center;">
-            <a href="{{ path('app_posts_new') }}" class="btn btn-success">Publier une nouvelle question</a>
+            <a href="{{ path('app_posts_new_F') }}" class="btn btn-success">Publier une nouvelle question</a>
         </div>
     </div>
 {% endblock %}
