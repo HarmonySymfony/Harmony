@@ -7,7 +7,7 @@
         <div class="pb-12 border-b border-gray-200">
             <h1 class="text-6xl pt-12 pb-8">Register</h1>
 
-            <form method="post" action="{{ app_register }}">
+            {{ form_start(registrationForm) }}
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     <div class="form-group">
                         <label for="nom" class="block text-gray-700">Nom</label>
@@ -46,7 +46,8 @@
                 <button type="submit" class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg w-1/5 mt-10 font-extrabold py-4 px-8 rounded-3xl">
                     Register
                 </button>
-            </form>
+            {{ form_end(registrationForm) }}
         </div>
     </div>
 {% endblock %}
+
