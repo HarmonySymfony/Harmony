@@ -20,6 +20,7 @@ class Medicament
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le stock ne peut pas être vide.")]
+    #[Assert\Type(type:"numeric", message:"Le prix doit être un nombre.")]
     private ?string $stock = null;
 
     #[ORM\Column(length: 255)]

@@ -6,6 +6,8 @@ use App\Entity\Pharmacie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class PharmacieType extends AbstractType
 {
@@ -15,7 +17,14 @@ class PharmacieType extends AbstractType
             ->add('idU')
             ->add('nom')
             ->add('adress')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Jour' => 'JOUR',
+                    'Nuit' => 'NUIT',
+                    // Add more roles as needed
+                ],
+                
+            ])
         ;
     }
 

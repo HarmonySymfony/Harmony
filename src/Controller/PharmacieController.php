@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/pharmacie')]
 class PharmacieController extends AbstractController
 {
-    #[Route('/front/list', name: 'app_pharmacie_index', methods: ['GET'])]
+    #[Route('/frontoffice/list', name: 'app_pharmacie_index', methods: ['GET'])]
     public function index(PharmacieRepository $pharmacieRepository): Response
     {
         return $this->render('frontoffice/pharmacie/index.html.twig', [
@@ -29,7 +29,7 @@ class PharmacieController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_pharmacie_new', methods: ['GET', 'POST'])]
+    #[Route('/frontoffice/new', name: 'app_pharmacie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $pharmacie = new Pharmacie();
@@ -48,7 +48,7 @@ class PharmacieController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/new_backoffice', name: 'app_pharmacie_new_backoffice', methods: ['GET', 'POST'])]
+    #[Route('/backoffice/new', name: 'app_pharmacie_new_backoffice', methods: ['GET', 'POST'])]
     public function new_backoffice(Request $request, EntityManagerInterface $entityManager): Response
     {
         $pharmacie = new Pharmacie();
@@ -69,7 +69,7 @@ class PharmacieController extends AbstractController
     }
     
 
-    #[Route('/{id}', name: 'app_pharmacie_show', methods: ['GET'])]
+    #[Route('/frontoffice/{id}', name: 'app_pharmacie_show', methods: ['GET'])]
     public function show(Pharmacie $pharmacie): Response
     {
         return $this->render('frontoffice/pharmacie/show.html.twig', [
@@ -78,7 +78,7 @@ class PharmacieController extends AbstractController
     }
 
 
-    #[Route('/{id}/show_backoffice', name: 'app_pharmacie_show_backoffice', methods: ['GET'])]
+    #[Route('/backoffice/{id}/show', name: 'app_pharmacie_show_backoffice', methods: ['GET'])]
     public function show_backoffice(Pharmacie $pharmacie): Response
     {
         return $this->render('backoffice/pharmacie/show.html.twig', [
@@ -86,7 +86,7 @@ class PharmacieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_pharmacie_edit', methods: ['GET', 'POST'])]
+    #[Route('/frontoffice/{id}/edit', name: 'app_pharmacie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pharmacie $pharmacie, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PharmacieType::class, $pharmacie);
@@ -104,7 +104,7 @@ class PharmacieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit_backoffice', name: 'app_pharmacie_edit_backoffice', methods: ['GET', 'POST'])]
+    #[Route('/backoffice/{id}/edit', name: 'app_pharmacie_edit_backoffice', methods: ['GET', 'POST'])]
     public function edit_backoffice(Request $request, Pharmacie $pharmacie, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PharmacieType::class, $pharmacie);
@@ -122,7 +122,7 @@ class PharmacieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pharmacie_delete', methods: ['POST'])]
+    #[Route('/frontoffice/{id}', name: 'app_pharmacie_delete', methods: ['POST'])]
     public function delete(Request $request, Pharmacie $pharmacie, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pharmacie->getId(), $request->request->get('_token'))) {
@@ -133,7 +133,7 @@ class PharmacieController extends AbstractController
         return $this->redirectToRoute('app_pharmacie_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/delte_backoffice', name: 'app_pharmacie_delete_backoffice', methods: ['POST'])]
+    #[Route('/backoffice/{id}/delte', name: 'app_pharmacie_delete_backoffice', methods: ['POST'])]
     public function delete_backoffice(Request $request, Pharmacie $pharmacie, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pharmacie->getId(), $request->request->get('_token'))) {
