@@ -27,6 +27,9 @@ class RegistrationFormType extends AbstractType
                     'class' => 'bg-transparent block mt-10 mx-auto border-b-2 w-1/5 h-20 text-2xl outline-none',
                     'placeholder' => 'Nom'
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Please enter your last name'])
+                ],
             ])
             ->add('prenom', TextType::class, [
                 'label' => false,
@@ -34,6 +37,9 @@ class RegistrationFormType extends AbstractType
                     'autocomplete' => 'prenom',
                     'class' => 'bg-transparent block mt-10 mx-auto border-b-2 w-1/5 h-20 text-2xl outline-none',
                     'placeholder' => 'Prenom'
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Please enter your first name'])
                 ],
             ])
             ->add('email', TextType::class, [
@@ -43,6 +49,9 @@ class RegistrationFormType extends AbstractType
                     'class' => 'bg-transparent block mt-10 mx-auto border-b-2 w-1/5 h-20 text-2xl outline-none',
                     'placeholder' => 'Email'
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Please enter your email'])
+                ],
             ])
             ->add('age', IntegerType::class, [
                 'label' => false,
@@ -50,6 +59,9 @@ class RegistrationFormType extends AbstractType
                     'autocomplete' => 'age',
                     'class' => 'bg-transparent block mt-10 mx-auto border-b-2 w-1/5 h-20 text-2xl outline-none',
                     'placeholder' => 'Age'
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Please enter your age'])
                 ],
             ])
             ->add('role', ChoiceType::class, [
@@ -60,6 +72,9 @@ class RegistrationFormType extends AbstractType
                     'Pharmacien' => 'PHAMACIEN',
                     'Patient' => 'PATIENT',
                     // Add more roles as needed
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Please select a role'])
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
