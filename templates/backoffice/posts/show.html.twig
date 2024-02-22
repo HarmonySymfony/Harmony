@@ -10,7 +10,7 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Id</th>
+                    <th>Id Publication</th>
                     <td>{{ post.id }}</td>
                 </tr>
                 <tr>
@@ -23,14 +23,14 @@
                         {% if post.postedAs =='Anonyme' %}
                             Anonyme
                         {% else %}
-                            {{ post.user.username }}
+{#                            {{ post.user.username }}#}
                         {% endif %}
                     </td>
                 </tr>
                 <tr>
                     <th>ID User</th>
                     <td>
-                        {{ post.user.id }}
+{#                        {{ post.user.id }}#}
 {#                        do like this for Frontoffice#}
 {#                        {% if post.postedAs =='Anonyme' %}#}
 {#                            Anonyme#}
@@ -40,8 +40,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Date_creation</th>
+                    <th>Date création</th>
                     <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+
+                </tr>
+                <tr>
+                    <th>Date dernière modification</th>
+                    <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
+
                 </tr>
             </tbody>
         </table>

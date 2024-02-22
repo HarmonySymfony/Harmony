@@ -13,6 +13,7 @@
                 <th>Publié par</th>
                 <th>Publication</th>
                 <th>Date de Publication</th>
+                <th>Date de dernière modification</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -24,11 +25,12 @@
                         {% if post.postedAs =='Anonyme' %}
                             Anonyme
                         {% else %}
-                            {{ post.user.username }}
+{#                            {{ post.user.username }}#}
                         {% endif %}
                     </td>
                     <td>{{ post.contenu }}</td>
                     <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
                     <td><a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
                     <td><a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
                     <td>{{ include('backoffice/posts/_delete_form.html.twig') }}</td>
