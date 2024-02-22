@@ -33,10 +33,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_pharmacie_backoffice_index') }}">back to list</a>
-
-    <a href="{{ path('app_pharmacie_edit_backoffice', {'id': pharmacie.id}) }}">edit</a>
-
-    {{ include('backoffice/pharmacie/_delete_form.html.twig') }}
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <a class="btn btn-secondary" href="{{ path('app_pharmacie_backoffice_index') }}">Back to list</a>
+                    <a href="{{ path('app_pharmacie_edit_backoffice', {'id': pharmacie.id}) }}" class="btn btn-primary btn-lg" style="background-color: #18d26e;">Edit</a>
+                    {{ include('backoffice/pharmacie/_delete_form.html.twig') }}
+                    <!-- Ajoutez d'autres liens ici selon vos besoins -->
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 {% endblock %}

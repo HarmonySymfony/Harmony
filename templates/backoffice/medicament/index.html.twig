@@ -3,9 +3,9 @@
 {% block title %}Medicament index{% endblock %}
 
 {% block body %}
-    <h1>Medicament index</h1>
+   
     <div style="padding-left: 200px;padding-top: 200px" class="container">
-
+ <h1>Medicament list</h1>
 
     <table class="table">
         <thead>
@@ -41,6 +41,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_medicament_new_backoffice') }}">Create new</a>
+    <a href="{{ path('app_medicament_new_backoffice') }}" class="btn btn-primary"  >Create new</a>
     </div>
 {% endblock %}

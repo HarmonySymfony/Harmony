@@ -9,6 +9,17 @@
 
     {{ include('backoffice/pharmacie/_form.html.twig') }}
 
-   
+       <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-secondary" href="{{ path('app_pharmacie_backoffice_index') }}">Back to list</a>                        
+                        <!-- Ajoutez d'autres liens ici selon vos besoins -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
