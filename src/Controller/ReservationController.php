@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Evenement;
+use App\Entity\Reservation;
+use phpDocumentor\Reflection\Types\Array_;
+use phpDocumentor\Reflection\Types\False_;
+use ProxyManager\Exception\ExceptionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
+
+class ReservationController extends AbstractController
+{
+    /**
+     * @Route("/reservation", name="reservation")
+     */
+    public function index(): Response
+    {
+        return $this->render('reservation/index.html.twig', [
+            'controller_name' => 'ReservationController',
+        ]);
+    }
+
+
+
+
+
+
+
+
+   
+    /**
+     * @Route("/reserverEvent/{id}", name="reserverEvent")
+     */
+    public function reserverEvent(Request $req, $id, EntityManagerInterface $entityManager)
+    {
+        $evenement = $entityManager->getRepository(Evenement::class)->find($id);
+        $reservation = new Reservation();
+
+        if ($req->isMethod("post")) {
+            $reservation->setIdevent($evenement);
+            $nbredeticketDemandé = (int)($req->get('nbrplace'));
+            $reservation->setApprouve(0);
+
+
+            if ($nbredeticketDemandé <= $evenement->getPlaceDispo()) {
+                $reservation->setNbrPlace($nbredeticketDemandé);
+                $evenement->setPlaceDispo(($evenement->getPlaceDispo()) - (int)($req->get('nbrplace')));
+            } else {
+                return $this->redirectToRoute('reserverEvent', array('id' => $id));
+            }
+            try {
+                $entityManager->persist($reservation);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_evenement_show', ['id' => $id]);
+            } catch (ExceptionInterface $e) {
+            }
+        }
+
+        return $this->render('evenement/show.html.twig', array('evenement' => $evenement));
+    }
+
+
+
+
+
+
+
+
+    /**
+     * @Route("/listreservation/{id}", name="afficherReservation")
+     */
+    public function listReservationByEvent($id, EntityManagerInterface $entityManager){
+        $event=$entityManager->getRepository(Evenement::class)->find($id);
+        $listReservation=$entityManager->getRepository(Reservation::class)->findBy(array('idevent'=>$event));
+        return $this->render('reservation/listReservation.html.twig',array('reservations'=>$listReservation));
+
+    }
+
+
+
+
+
+
+
+    // /**
+    //  * @Route("/listreser", name="listReservation")
+    //  */
+    // public function listReservation(){
+    //     $listReservation=$this->getDoctrine()->getRepository(Reservation::class)->findAll();
+
+    //     return $this->render('event/listReser.html.twig',array('reservations'=>$listReservation));
+
+    // }
+
+
+
+
+
+
+    /**
+     * @param int $id
+     * @Route("/approuverReservation/{id}", name="approuverReservation")
+     */
+    public function approuverReservation(int $id, EntityManagerInterface $entityManager)
+    {
+        $reservation = $entityManager->getRepository(Reservation::class)->find($id);
+
+        if (!$reservation) {
+            throw $this->createNotFoundException('Reservation not found for id ' . $id);
+        }
+
+        $reservation->setApprouve(true);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('listReservation', ['id' => $id]);
+    }
+}

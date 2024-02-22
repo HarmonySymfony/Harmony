@@ -14,13 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
+    // #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
+    // public function index(EvenementRepository $evenementRepository): Response
+    // {
+    //     return $this->render('evenement/index.html.twig', [
+    //         'evenements' => $evenementRepository->findAll(),
+    //     ]);
+    // }
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
-    {
-        return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
-        ]);
+public function index(Request $request, EvenementRepository $evenementRepository): Response
+{
+    $query = $request->query->get('query');
+
+    if ($query) {
+        $evenements = $evenementRepository->search($query);
+    } else {
+        $evenements = $evenementRepository->findAll();
     }
+
+    return $this->render('evenement/index.html.twig', [
+        'evenements' => $evenements,
+    ]);
+}
 
     #[Route('/listeventfront', name: 'app_evenement_front', methods: ['GET'])]
     public function listEvenetFront(EvenementRepository $evenementRepository): Response
@@ -38,6 +53,16 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $newFilename = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('EventImage_directory'),
+                    $newFilename
+                );
+    
+                $evenement->setImage($newFilename);
+            }
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -65,6 +90,16 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $newFilename = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('EventImage_directory'),
+                    $newFilename
+                );
+    
+                $evenement->setImage($newFilename);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);

@@ -1,4 +1,4 @@
-
+{% extends 'baseFront.html.twig' %}
 
 {% block title %}
 
@@ -7,6 +7,12 @@
 
 {% block content %}
 
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <section id="hero" class="d-flex align-items-center">
+    <div class="container">
+      <h1>Welcome to sa7tek</h1>
+      <h2>We are team of talented developers trying to make your life easier!</h2>
+      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+    </div>
+  </section>
 {% endblock %}
 

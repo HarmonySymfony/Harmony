@@ -4,51 +4,67 @@
 {% block content %}
 	<title>Evenement</title>
 	<h1>{{ evenement.nom }}</h1>
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ evenement.id }}</td>
-			</tr>
-			<tr>
-				<th>Nom</th>
-				<td>{{ evenement.nom }}</td>
-			</tr>
-			<tr>
-				<th>DateEvent</th>
-				<td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>{{ evenement.description }}</td>
-			</tr>
-			<tr>
-				<th>Prix</th>
-				<td>{{ evenement.prix }}</td>
-			</tr>
-			<tr>
-				<th>Adress</th>
-				<td>{{ evenement.adress }}</td>
-			</tr>
-			<tr>
-				<th>Longitude</th>
-				<td>{{ evenement.longitude }}</td>
-			</tr>
-			<tr>
-				<th>Latitude</th>
-				<td>{{ evenement.latitude }}</td>
-			</tr>
-
-			<tr>
-				<th>PlaceDispo</th>
-				<td>{{ evenement.PlaceDispo }}</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<a href="{{ path('app_evenement_front') }}">back to list</a>
-
-	{# <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a> #}
 
 
-</div>{% endblock %}
+	<section id="about" class="about">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-xl-5 col-lg-6  d-flex justify-content-center align-items-stretch position-relative">
+					                            <img src=" {{ asset('Uploads/Image/' ~ evenement.image) }}"  width="562" height="550"  >
+
+				</div>
+
+
+				<div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+					<h3>{{ evenement.nom }}</h3>
+
+					<div class="icon-box">
+						<div class="icon">
+							<i class="bx bi-geo-alt"></i>
+						</div>
+						<h4 class="title">
+							<a href="#">Localisation</a>
+						</h4>
+						<p class="description">{{ evenement.adress }}</p>
+					</div>
+
+					<div class="icon-box">
+						<div class="icon">
+							<i class="bx bx-receipt"></i>
+						</div>
+						<h4 class="title">
+							<a href="#">Details:</a>
+						</h4>
+						<p class="description">{{ evenement.description }}</p>
+					</div>
+
+					<div class="icon-box">
+						<div class="icon">
+							<i class="fas fa-dna"></i>
+						</div>
+						<h4 class="title">
+							<a href="#">Réservez maintenant:</a>
+						</h4>
+						<p class="description">{{ evenement.placeDispo }}
+							places disponibles !!!</p>
+					</div>
+						<form method="post" action="{{ path('reserverEvent', {'id': evenement.id}) }}" class="nk-form" novalidate="novalidate">
+							<div class="row sm-gap vertical-gap align-items-center justify-content-center">
+								<div class="text-center icon-box col-md-4">
+									<input type="number" class="form-control required" id="nbrplace" name="nbrplace" placeholder="Nombre de tickets">
+								</div>
+							</br>
+						</br>
+						<div class="text-center">
+							<button  class="btn btn-success">Reserver</button>
+
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+
+
+</div></section>{% endblock %}

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Evénement!
 			{% endblock %}
 		</title>
 
@@ -65,22 +65,22 @@
 				<nav id="navbar" class="navbar order-last order-lg-0">
 					<ul>
 						<li>
-							<a class="nav-link scrollto " href="#hero">Home</a>
+							<a class="nav-link scrollto " href={{  url('app_hello')  }}>Home</a>
 						</li>
 						<li>
-							<a class="nav-link scrollto" href="#acabinets">cabinets</a>
+							<a class="nav-link scrollto" href="#acabinets">Cabinets</a>
 						</li>
 						<li>
-							<a class="nav-link scrollto" href="#pharmacies">pharmacies</a>
+							<a class="nav-link scrollto" href="#pharmacies">Pharmacies</a>
 						</li>
 						<li>
-							<a class="nav-link scrollto" href="#laboratoires">laboratoires</a>
+							<a class="nav-link scrollto" href="#laboratoires">Laboratoires</a>
 						</li>
 						<li>
-							<a class="nav-link scrollto" href="#forum">forum</a>
+							<a class="nav-link scrollto" href="#forum">Forum</a>
 						</li>
 						<li>
-							<a class="nav-link scrollto" href={{  url('app_evenement_front')  }}>événements</a>
+							<a class="nav-link scrollto" href={{  url('app_evenement_front')  }}>Evénements</a>
 						</li>
 						<li class="dropdown">
 							<a href="#">
@@ -134,7 +134,7 @@
 			id="main">
 
 			<!-- ======= Breadcrumbs Section ======= -->
-			<section class="breadcrumbs">
+			{# <section class="breadcrumbs">
 				<div class="container">
 
 					<div class="d-flex justify-content-between align-items-center">
@@ -148,7 +148,7 @@
 					</div>
 
 				</div>
-			</section>
+			</section> #}
 			<!-- End Breadcrumbs Section -->
 
 			<section class="inner-page">

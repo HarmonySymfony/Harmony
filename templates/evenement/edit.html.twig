@@ -3,13 +3,67 @@
 
 
 {% block content %}
-<title>Edit Evenement</title>
+<div class="row justify-content-center">
+		<div class="col-lg-6 ">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h2 class="m-0 font-weight-bold text-primary text-center">Modifier évènement!</h2>
+				</div>
+				<div class="card-body">
+					<div class="col-lg-14">
+						<div class="p-5">
+							<div
+								class="text-center">{# <h1 class="h4 text-gray-900 mb-4">Créer un évènement!</h1> #}
+							</div>
+							{{ form_start(form) }}
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.nom)}}
+								</div>
+								<div class="col-sm-6">
+									{{ form_widget(form.description)}}
+								</div>
+							</div>
+							<div class="form-group">
+								{{ form_widget(form.dateEvent)}}
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.adress)}}
+								</div>
+								<div class="col-sm-6">
+									{{ form_widget(form.prix)}}
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.placeDispo)}}
+								</div>
 
-    <h1>Edit Evenement</h1>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									{{ form_widget(form.image)}}
+								</div>
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary mr-2">Submit</button>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
 
-    {{ include('evenement/_form.html.twig', {'button_label': 'Update'}) }}
+		</div>
+	</div>
+  <a href="{{ path('app_evenement_index') }}" class="back-link">
+    <i class="fas fa-arrow-left"></i>
+    <button class="btn">
+        <!-- Button Text -->
+    </button>
+</a>
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
 
     
 {% endblock %}

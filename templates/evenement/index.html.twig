@@ -1,56 +1,139 @@
 
-
 {% extends 'baseBack.html.twig' %}
 
 {% block content %}
-<div class="container-fluid">
-<title>Evenement index</title>
-    <h1>Evenement index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>DateEvent</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Adress</th>
-                <th>Longitude</th>
-                <th>Latitude</th>
+
+
+
+
+    {# <div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Liste des évènements:</h2>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary me-md-2" type="button" onclick="window.location.href='{{ path('app_evenement_new') }}'">Créer évènement</button>
+
+            </div>
             
-                <th>PlaceDispo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.id }}</td>
-                <td>{{ evenement.nom }}</td>
-                <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ evenement.description }}</td>
-                <td>{{ evenement.prix }}</td>
-                <td>{{ evenement.adress }}</td>
-                <td>{{ evenement.longitude }}</td>
-                <td>{{ evenement.latitude }}</td>
-                <td>{{ evenement.PlaceDispo }}</td>
-                <td>
-                    {# <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a> #}
-                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-                
-                    {# <a href="{{ url('app_evenement_delete', {'id': evenement.id}) }}" class="button">delete</a> #}
-                   {{ include('evenement/_delete_form.html.twig') }} 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_evenement_new') }}">Create new</a>
+        </div>
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>DateEvent</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Adress</th>
+                          
+                            <th>PlaceDispo</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evenement in evenements %}
+                        <tr>
+                            <td>{{ evenement.id }}</td>
+                            <td>{{ evenement.nom }}</td>
+                            <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ evenement.description }}</td>
+                            <td>{{ evenement.prix }} DT</td>
+                            <td>{{ evenement.adress }}</td>
+                        
+                            <td>{{ evenement.placeDispo }}</td>
+                            <td><img src="{{ asset('Uploads/Image/' ~ evenement.Image) }}" height="100" width="100"></td>
+                            <td>
+                                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}"><i class="fas fa-pen" style="color:blue;"></i></a>
+                                {{ include('evenement/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+    
+</div> #}
+
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Liste des évènements:</h2>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2" type="button" onclick="window.location.href='{{ path('app_evenement_new') }}'">Créer évènement</button>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="mb-3">
+                <form action="{{ path('app_evenement_index') }}" method="get" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search..." value="{{ app.request.query.get('query') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>DateEvent</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Adress</th>
+                            <th>PlaceDispo</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evenement in evenements %}
+                        <tr>
+                            <td>{{ evenement.id }}</td>
+                            <td>{{ evenement.nom }}</td>
+                            <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ evenement.description }}</td>
+                            <td>{{ evenement.prix }} DT</td>
+                            <td>{{ evenement.adress }}</td>
+                            <td>{{ evenement.placeDispo }}</td>
+                            <td><img src="{{ asset('Uploads/Image/' ~ evenement.Image) }}" height="100" width="100"></td>
+                             <td><label class="badge badge-light"><a href="{{ url('afficherReservation',{'id':evenement.id}) }}">Reservations</a></label></td>
+                            <td>
+                                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}"><i class="fas fa-pen" style="color:blue;"></i></a>
+                                {{ include('evenement/_delete_form.html.twig') }}
+                            </td>
+
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

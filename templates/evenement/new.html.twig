@@ -1,14 +1,80 @@
-
 {% extends 'baseBack.html.twig' %}
 
 
 {% block content %}
-<title>New Evenement</title>
-<div class="container-fluid">
-    <h1>Create new Evenement</h1>
+	<title>New Evenement</title>
+	{# <div class="container-fluid">
+												<h1>Create new Evénement</h1>
+												{{ form_start(form, {'attr': {'novalidate': 'novalidate' }}) }}
+												{{ form_widget(form) }}
+												<button class="btn">{{ button_label|default('Save') }}</button>
+												{{ form_end(form) }}
+										
+												<a href="{{ path('app_evenement_index') }}">Back to list</a>
+		
+										</div> #}
 
-    {{ include('evenement/_form.html.twig') }}
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
-    </div>
+	<div class="row justify-content-center">
+		<div class="col-lg-6 ">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h2 class="m-0 font-weight-bold text-primary text-center">Créer un évènement!</h2>
+				</div>
+				<div class="card-body">
+					<div class="col-lg-14">
+						<div class="p-5">
+							<div
+								class="text-center">{# <h1 class="h4 text-gray-900 mb-4">Créer un évènement!</h1> #}
+							</div>
+							{{ form_start(form, {'attr': {'novalidate': 'novalidate' }}) }}
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.nom)}}
+									{{ form_errors(form.nom)}}
+								</div>
+								<div class="col-sm-6">
+									{{ form_widget(form.description)}}
+									{{ form_errors(form.description)}}
+								</div>
+							</div>
+							<div class="form-group">
+								{{ form_widget(form.dateEvent)}}
+								{{ form_errors(form.dateEvent)}}
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.adress)}}
+									{{ form_errors(form.adress)}}
+								</div>
+								<div class="col-sm-6">
+									{{ form_widget(form.prix)}}
+									{{ form_errors(form.prix)}}
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.placeDispo)}}
+									{{ form_errors(form.placeDispo)}}
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									{{ form_widget(form.image)}}
+									{{ form_errors(form.image)}}
+								</div>
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary mr-2">Submit</button>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 {% endblock %}
