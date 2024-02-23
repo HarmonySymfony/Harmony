@@ -37,13 +37,13 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/doctors', name: 'app_utilisateur_front_index', methods: ['GET'])]
-    public function frontoffice(UtilisateurRepository $utilisateurRepository): Response
-    {
-        return $this->render('backoffice/user/list_users_front.html.twig', [
-            'utilisateurs' => $utilisateurRepository->findAll(),
-        ]);
-    }
+//    #[Route('/doctors', name: 'app_utilisateur_front_index', methods: ['GET'])]
+//    public function frontoffice(UtilisateurRepository $utilisateurRepository): Response
+//    {
+//        return $this->render('backoffice/user/list_users_front.html.twig', [
+//            'utilisateurs' => $utilisateurRepository->findAll(),
+//        ]);
+//    }
 
     #[Route('/backoffice/home', name: 'app_utilisateur_backoffice', methods: ['GET'])]
     public function backoffice(UtilisateurRepository $utilisateurRepository): Response
@@ -59,6 +59,24 @@ class UserController extends AbstractController
 
         return $this->render('backoffice/patients/index.html.twig', [
             'patients' => $patients,
+        ]);
+    }
+    #[Route('/doctors', name: 'app_doctors')]
+    public function showDoctors(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $doctors = $utilisateurRepository->findByRole("DOCTOR");
+
+        return $this->render('backoffice/doctors/index.html.twig', [
+            'doctors' => $doctors,
+        ]);
+    }
+    #[Route('/pharmacies', name: 'app_pharmacies')]
+    public function showPharmacies(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $pharmacies = $utilisateurRepository->findByRole("PHAMACIEN");
+
+        return $this->render('backoffice/pharmacies/index.html.twig', [
+            'pharmacies' => $pharmacies,
         ]);
     }
 

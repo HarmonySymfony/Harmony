@@ -28,7 +28,7 @@
         <hr class="sidebar-divider my-0">
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ path('app_utilisateur_backoffice_dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -50,13 +50,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ path('app_pharmacies') }}">
                 <i class="fas fa-fw fa-hospital"></i>
                 <span>Pharmacies</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ path('app_doctors') }}">
                 <i class="fas fa-fw fa-user-md"></i>
                 <span>Medecins</span>
             </a>
