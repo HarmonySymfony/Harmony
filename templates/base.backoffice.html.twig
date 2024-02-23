@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Dashboard</title>
+    <title>صحتك</title>
     <!-- Custom fonts for this template-->
     <link href={{asset('assetfront/vendor/fontawesome-free/css/all.min.css')}} rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
@@ -22,7 +22,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">صحتك</div>
         </a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -33,17 +33,59 @@
                 <span>Dashboard</span></a>
         </li>
         <!-- Divider -->
+
+        <!-- Heading -->
+
+        <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Sections
         </div>
-        <!-- Nav Item - Tables -->
+        <!-- Nav Items for Sections -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-newspaper"></i>
+                <span>Posts</span>
+            </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-hospital"></i>
+                <span>Pharmacies</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-user-md"></i>
+                <span>Medecins</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-pills"></i>
+                <span>Medicaments</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-calendar-alt"></i>
+                <span>Evenements</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-flask"></i>
+                <span>Laboratoires</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_patients') }}">
+                <i class="fas fa-fw fa-user-friends"></i>
+                <span>Patients</span>
+            </a>
+        </li>
+        <!-- Add more sections as needed -->
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         <!-- Sidebar Toggler (Sidebar) -->
@@ -57,6 +99,7 @@
                 <span>Logout</span>
             </a>
         </li>
+
     </ul>
     <!-- End of Sidebar -->
     <!-- Content Wrapper -->

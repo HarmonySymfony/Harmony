@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Form\RegistrationFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,15 @@ class UserController extends AbstractController
             // 'utilisateurs' => $utilisateurRepository->findAll(),
         ]);
     }
+    #[Route('/patients', name: 'app_patients')]
+    public function showPatients(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $patients = $utilisateurRepository->findByRole("PATIENT");
+
+        return $this->render('backoffice/patients/index.html.twig', [
+            'patients' => $patients,
+        ]);
+    }
 
     #[Route('/{id}', name: 'app_utilisateur_show', methods: ['GET'])]
     public function show(Utilisateur $utilisateur): Response
@@ -88,4 +98,6 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
