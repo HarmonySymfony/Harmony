@@ -29,8 +29,8 @@
                 <td>{{ medicament.description }}</td>
                 <td>{{ medicament.prix }}</td>
                 <td>
-                    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}">show</a>
-                    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}">edit</a>
+                    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}"class="btn btn-success">edit</a>
+                    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}"class="btn btn-primary">show</a>
                 </td>
             </tr>
         {% else %}
@@ -40,7 +40,8 @@
         {% endfor %}
         </tbody>
     </table>
+                    <a href="{{ path('app_medicament_new') }}"class="btn btn-info">Create new</a>
 
-    <a href="{{ path('app_medicament_new') }}">Create new</a>
+    
     </div>
 {% endblock %}

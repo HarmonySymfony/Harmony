@@ -3,46 +3,58 @@
 {% block title %}Pharmacie{% endblock %}
 
 {% block body %}
+    <div style="padding-left: 100px; padding-top: 200px" class="container">
+        <div class="container mt-5">
+            <h1>Pharmacie</h1>
 
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ pharmacie.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>IdU</th>
+                        <td>{{ pharmacie.idU }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ pharmacie.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ pharmacie.adress }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ pharmacie.type }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <h1>Pharmacie</h1>
-<div style="padding-left: 200px;padding-top: 200px" class="container">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ pharmacie.id }}</td>
-            </tr>
-            <tr>
-                <th>IdU</th>
-                <td>{{ pharmacie.idU }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ pharmacie.nom }}</td>
-            </tr>
-            <tr>
-                <th>Adress</th>
-                <td>{{ pharmacie.adress }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ pharmacie.type }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <h2>Liste des médicaments :</h2>
+            <ul>
+                {% if pharmacie.medicaments is not empty %}
+        {% for medicament in pharmacie.medicaments %}
+            <li>{{ medicament.nom }} - {{ medicament.description }}</li>
+        {% endfor %}
+    {% else %}
+        <li>Aucun médicament disponible</li>
+    {% endif %}
+            </ul>
 
- <div class="row mt-4">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body d-flex justify-content-between">
-                    <a class="btn btn-secondary" href="{{ path('app_pharmacie_index') }}">Back to list</a>
-                    <a href="{{ path('app_pharmacie_edit', {'id': pharmacie.id}) }}" class="btn btn-primary btn-lg" style="background-color: #18d26e;">Edit</a>
-                    {{ include('frontoffice/pharmacie/_delete_form.html.twig') }}
-                    <!-- Ajoutez d'autres liens ici selon vos besoins -->
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body d-flex justify-content-between">
+                            <a class="btn btn-secondary" href="{{ path('app_pharmacie_index') }}">Retour à la liste</a>
+                            <a href="{{ path('app_pharmacie_edit', {'id': pharmacie.id}) }}" class="btn btn-primary btn-lg" style="background-color: #18d26e;">Modifier</a>
+                            {{ include('frontoffice/pharmacie/_delete_form.html.twig') }}
+                            <!-- Ajoutez d'autres liens ici selon vos besoins -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

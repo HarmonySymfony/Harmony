@@ -25,8 +25,10 @@
                             <td>{{ pharmacie.adress }}</td>
                             <td>{{ pharmacie.type }}</td>
                             <td>
-                                <a href="{{ path('app_pharmacie_show_backoffice', {'id': pharmacie.id}) }}">Show</a>
-                                <a href="{{ path('app_pharmacie_edit_backoffice', {'id': pharmacie.id}) }}">Edit</a>
+                                <a href="{{ path('app_pharmacie_edit_backoffice', {'id': pharmacie.id}) }}"class="btn btn-success">Edit</a>
+                                <a href="{{ path('app_pharmacie_show_backoffice', {'id': pharmacie.id}) }}"class="btn btn-primary">Show</a>
+                                
+                                
                             </td>
                         </tr>
                     {% else %}
@@ -37,7 +39,8 @@
                 </tbody>
             </table>
         </div>
+                                <a href="{{ path('app_pharmacie_new_backoffice') }}" class="btn btn-info">Create new</a>
 
-        <a href="{{ path('app_pharmacie_new_backoffice') }}" class="btn btn-primary">Create new</a>
+
     </div>
 {% endblock %}
