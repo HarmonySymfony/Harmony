@@ -3,7 +3,7 @@
 {% block title %}Posts{% endblock %}
 
 {% block body %}
-    <div style="padding-left: 10px;padding-top 100px" class="container">
+    <div style="padding-left: 10px;padding-top: 100px" class="container">
 
     <h1>Détails</h1>
 
@@ -28,7 +28,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>User</th>
+                    <th>User ID</th>
                     <td>
                         {{ post.utilisateur.id }}
 
@@ -51,11 +51,22 @@
             <tbody>
                 <tr>
                     <div style="text-align: center;">
-                        <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
-                    </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ path('app_comments_index' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires</a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ path('app_posts_index') }}" class="btn btn-primary">Retour à la liste</a>
+                            </div>
+                            <div class="col">
+                                {% include 'backoffice/posts/_delete_form.html.twig' %}
+                            </div>
+                        </div>
+                    </div>
                 </tr>
             </tbody>
         </table>

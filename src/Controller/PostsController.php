@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\U;
-
 use App\Entity\Posts;
 use App\Form\PostsType;
 use App\Repository\PostsRepository;

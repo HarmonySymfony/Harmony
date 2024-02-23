@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PostsRepository;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: PostsRepository::class)]
+#[ORM\Entity(repositoryClass: CommentsRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Posts
+class Comments
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
@@ -22,18 +22,22 @@ class Posts
     private string $contenu;
 
     #[ORM\Column(type: "datetime")]
-    private \DateTimeInterface $date_creation;
+    private \DateTimeInterface $dateCreation;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?\DateTimeInterface $last_modification;
+    private ?\DateTimeInterface $lastModification;
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
     #[ORM\JoinColumn(name: "utilisateur_id", referencedColumnName: "id")]
     private Utilisateur $utilisateur;
 
+    #[ORM\ManyToOne(targetEntity: Posts::class)]
+    #[ORM\JoinColumn(name: "posts_id", referencedColumnName: "id")]
+    private Posts $post;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le  ne peut pas être vide')]
-    private string $postedAs = 'Anonyme';
+    private string $commentedAs = 'Anonyme';
 
     public function getId(): ?int
     {
@@ -54,23 +58,23 @@ class Posts
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
-        $this->date_creation = new \DateTime();
+        $this->dateCreation = new \DateTime();
     }
 
     public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->date_creation;
+        return $this->dateCreation;
     }
 
     #[ORM\PreUpdate]
     public function setModifiedValue(): void
     {
-        $this->last_modification = new \DateTime();
+        $this->lastModification = new \DateTime();
     }
 
     public function getLastModification(): ?\DateTimeInterface
     {
-        return $this->last_modification;
+        return $this->lastModification;
     }
 
     public function getUtilisateur(): ?Utilisateur
@@ -84,14 +88,25 @@ class Posts
         return $this;
     }
 
-    public function getPostedAs(): ?string
+    public function getPost(): ?Posts
     {
-        return $this->postedAs;
+        return $this->post;
     }
 
-    public function setPostedAs(string $postedAs): static
+    public function setPost(?Posts $post): self
     {
-        $this->postedAs = $postedAs;
+        $this->post = $post;
+        return $this;
+    }
+
+    public function getCommentedAs(): ?string
+    {
+        return $this->commentedAs;
+    }
+
+    public function setCommentedAs(string $commentedAs): static
+    {
+        $this->commentedAs = $commentedAs;
         return $this;
     }
 }
