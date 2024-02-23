@@ -6,14 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
 
     <title>صحتك</title>
       
 
-=======
-    <title>صحتك</title>
->>>>>>> 34e717c566226f74f72f5dce6a7acc120967b4b1
     <!-- Custom fonts for this template-->
     <link href={{asset('assetfront/vendor/fontawesome-free/css/all.min.css')}} rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
@@ -55,7 +51,7 @@
             Sections
         </div>
         <!-- Nav Items for Sections -->
-        <li class="nav-item">
+    {#    <li class="nav-item">
             <a class="nav-link collapsed" href="{{path('app_pharmacie_backoffice_index')}}" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
@@ -66,7 +62,7 @@
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>medicament</span>
-            </a>
+            </a>#}
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -84,7 +80,7 @@
                 <span>Tables</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_pharmacies') }}">
+            <a class="nav-link" href="{{ path('app_pharmacie_backoffice_index') }}">
                 <i class="fas fa-fw fa-hospital"></i>
                 <span>Pharmacies</span>
             </a>
@@ -96,7 +92,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ path('app_medicament_index_backoffice') }}">
                 <i class="fas fa-fw fa-pills"></i>
                 <span>Medicaments</span>
             </a>
