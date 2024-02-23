@@ -32,16 +32,7 @@
                 </tbody>
             </table>
 
-            <h2>Liste des médicaments :</h2>
-            <ul>
-                {% if pharmacie.medicaments is not empty %}
-        {% for medicament in pharmacie.medicaments %}
-            <li>{{ medicament.nom }} - {{ medicament.description }}</li>
-        {% endfor %}
-    {% else %}
-        <li>Aucun médicament disponible</li>
-    {% endif %}
-            </ul>
+           
 
             <div class="row mt-4">
                 <div class="col-lg-12">

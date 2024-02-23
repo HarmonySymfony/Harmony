@@ -136,33 +136,6 @@ class Medicament
     }
 
     /**
-     * @return Collection<int, Tablestocks>
-     */
-    public function getTablestocks(): Collection
-    {
-        return $this->tablestocks;
-    }
-
-    public function addTablestock(Tablestocks $tablestock): static
-    {
-        if (!$this->tablestocks->contains($tablestock)) {
-            $this->tablestocks->add($tablestock);
-            $tablestock->addIdmedicament($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTablestock(Tablestocks $tablestock): static
-    {
-        if ($this->tablestocks->removeElement($tablestock)) {
-            $tablestock->removeIdmedicament($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Pharmacie>
      */
 

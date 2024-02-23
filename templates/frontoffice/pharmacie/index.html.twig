@@ -30,6 +30,7 @@
                     
                     <a href="{{ path('app_pharmacie_edit', {'id': pharmacie.id}) }}"class="btn btn-success">edit</a>
                     <a href="{{ path('app_pharmacie_show', {'id': pharmacie.id}) }}"class="btn btn-primary">show</a>
+                    <a href="{{ path('app_medicament_index', {'id': pharmacie.id}) }}"class="btn btn-warning">Medicament</a>
                 </td>
             </tr>
         {% else %}
