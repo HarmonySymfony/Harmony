@@ -37,13 +37,6 @@ class UserController extends AbstractController
         ]);
     }
 
-//    #[Route('/doctors', name: 'app_utilisateur_front_index', methods: ['GET'])]
-//    public function frontoffice(UtilisateurRepository $utilisateurRepository): Response
-//    {
-//        return $this->render('backoffice/user/list_users_front.html.twig', [
-//            'utilisateurs' => $utilisateurRepository->findAll(),
-//        ]);
-//    }
 
     #[Route('/backoffice/home', name: 'app_utilisateur_backoffice', methods: ['GET'])]
     public function backoffice(UtilisateurRepository $utilisateurRepository): Response
@@ -101,6 +94,23 @@ class UserController extends AbstractController
         }
 
         return $this->renderForm('backoffice/user/edit.html.twig', [
+            'utilisateur' => $utilisateur,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/{id}/front/edit', name: 'app_utilisateur_front_edit', methods: ['GET', 'POST'])]
+    public function editfrontoffice(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_hello', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('frontoffice/user/edit.html.twig', [
             'utilisateur' => $utilisateur,
             'form' => $form,
         ]);
