@@ -26,6 +26,7 @@ class Cabinet
 
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "L'horaire de réservation est obligatoire !")]
 
     private ?string $horaires = null;
     #[ORM\Column(length: 255, nullable: true)]
@@ -35,6 +36,9 @@ class Cabinet
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $rendezvous = null;
+
+    #[ORM\ManyToOne(inversedBy: 'idC')]
+    private ?RendezVous $rendezVous = null;
 
     public function getId(): ?int
     {
