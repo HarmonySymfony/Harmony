@@ -1,0 +1,15 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Pharmacies{% endblock %}
+
+{% block body %}
+    <div style="padding-top: 100px">
+
+        <h1>Pharmacies</h1>
+        <ul>
+            {% for pharmacie in pharmacies %}
+                <li>{{ pharmacie.nom }} {{ pharmacie.prenom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div style="padding-top: 200px" class="container mx-auto mt-32 text-center">
+        <div class="pb-12 border-b border-gray-200">
+            <h1 class="text-6xl pt-12 pb-8">Register</h1>
+
+            {{ form_start(registrationForm) }}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div class="form-group">
+                    <label for="nom" class="block text-gray-700">Nom</label>
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.nom) }}
+                </div>
+                <div class="form-group">
+                    <label for="prenom" class="block text-gray-700">Prenom</label>
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.prenom) }}
+                </div>
+                <div class="form-group">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+                <div class="form-group">
+                    <label for="age" class="block text-gray-700">Age</label>
+                    {{ form_widget(registrationForm.age, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.age) }}
+                </div>
+                <div class="form-group">
+                    <label for="role" class="block text-gray-700">Role</label>
+                    {{ form_widget(registrationForm.role, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.role) }}
+                </div>
+                <div class="form-group">
+                    <label for="plainPassword" class="block text-gray-700">Password</label>
+                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        <label for="agreeTerms" class="form-check-label">
+                            I agree to the Terms and Conditions
+                        </label>
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="submit" class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg w-1/5 mt-10 font-extrabold py-4 px-8 rounded-3xl">
+                Register
+            </button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}
