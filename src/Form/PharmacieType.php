@@ -2,40 +2,36 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Pharmacie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class UserType extends AbstractType
+
+class PharmacieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('email')
-            ->add('role', ChoiceType::class, [
+            ->add('idU')
+            ->add('nom')
+            ->add('adress')
+            ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'Admin' => 'ADMIN',
-                    'Doctor' => 'DOCTOR',
-                    'Laboratoire' => 'LABORATOIRE',
-                    'Pharmacien' => 'PHAMACIEN',
-                    'Patient' => 'PATIENT',
+                    'Jour' => 'JOUR',
+                    'Nuit' => 'NUIT',
                     // Add more roles as needed
                 ],
+                
             ])
-            ->add('nom')
-            ->add('prenom')
-            ->add('age')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Pharmacie::class,
         ]);
     }
 }

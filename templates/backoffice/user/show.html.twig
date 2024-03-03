@@ -382,26 +382,26 @@
                 <tbody>
                 <tr>
                     <th>Id</th>
-                    <td>{{ user.id }}</td>
+                    <td>{{ utilisateur.id }}</td>
                 </tr>
                 <tr>
                     <th>Nom</th>
-                    <td>{{ user.nom }}</td>
+                    <td>{{ utilisateur.nom }}</td>
                 </tr>
                 <tr>
                     <th>Prenom</th>
-                    <td>{{ user.prenom }}</td>
+                    <td>{{ utilisateur.prenom }}</td>
                 </tr>
                 <tr>
                     <th>Age</th>
-                    <td>{{ user.age }}</td>
+                    <td>{{ utilisateur.age }}</td>
                 </tr>
                 </tbody>
             </table>
 
-            <a href="{{ path('app_user_index') }}">back to list</a>
+            <a href="{{ path('app_utilisateur_backoffice_dashboard') }}">back to list</a>
 
-            <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+            <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
 
             {{ include('backoffice/user/_delete_form.html.twig') }}
 

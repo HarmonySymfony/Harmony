@@ -1,0 +1,15 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Doctors{% endblock %}
+
+{% block body %}
+    <div style="padding-top: 100px">
+
+        <h1>Doctors</h1>
+        <ul>
+            {% for doctor in doctors %}
+                <li>{{ doctor.nom }} {{ doctor.prenom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du rendezVous</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaeaea; /* Nouvelle couleur de fond */
+        }
+        
+        .container_table {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+            color: #888;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 100px; /* Ajuster la taille du logo selon vos besoins */
+        }
+    </style>
+</head>
+<body>
+    <div class="container_table">
+       <img src="{{ asset('assetfront/img/logo.png') }}" alt="logo">
+       
+        <h1>Détails du rendezVous</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id rendezVous</th>
+                    <td>{{ rendez_vou.id }}</td>
+                </tr>
+                <tr>
+                    <th> Nom </th>
+                    <td>{{ rendez_vou.nom }}</td>
+                </tr>
+                <tr>
+                    <th> Prenom </th>
+                    <td>{{ rendez_vou.prenom}}</td>
+                </tr>
+                <tr>
+                    <th> Date </th>
+                    <td>{{ rendez_vou.date }}</td>
+                </tr>
+                <tr>
+                    <th> Email </th>
+                    <td>{{ rendez_vou.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <h5>Signé</h5>
+        </div>
+    </div>
+</body>
+</html>
