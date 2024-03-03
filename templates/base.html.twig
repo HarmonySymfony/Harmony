@@ -37,10 +37,12 @@
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>
     {% if app.user %}
+      <a href="{{ path('app_utilisateur_front_edit', {'id': app.user.id}) }}" class="appointment-btn scroll-to-top">Profile</a>
       <a href="{{ path('app_logout') }}" class="appointment-btn scroll-to-top">Logout</a>
     {% else %}
       <a href="{{ path('app_login') }}" class="appointment-btn scroll-to-top">Login</a>
       <a href="{{ path('app_register') }}" class="appointment-btn scroll-to-top">Register</a>
+
     {% endif %}
   </div>
 </header>
