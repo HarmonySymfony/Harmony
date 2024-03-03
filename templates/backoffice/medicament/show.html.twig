@@ -1,0 +1,62 @@
+
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Medicament{% endblock %}
+
+{% block body %}
+<div style="padding-left: 200px;padding-top: 200px" class="container">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+           
+                <div class="card-body">
+                    <h1 class="mb-4">Medicament</h1>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Id</th>
+                                <td>{{ medicament.id }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reference</th>
+                                <td>{{ medicament.reference }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stock</th>
+                                <td>{{ medicament.stock }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Disponibilite</th>
+                                <td>{{ medicament.disponibilite }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Description</th>
+                                <td>{{ medicament.description }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prix</th>
+                                <td>{{ medicament.prix }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <a class="btn btn-secondary" href="{{ path('app_medicament_index_backoffice') }}">Back to list</a>
+                    <a href="{{ path('app_medicament_edit_backoffice', {'id': medicament.id}) }}" class="btn btn-primary btn-lg" style="background-color: #18d26e;">Edit</a>
+                    {{ include('backoffice/medicament/_delete_form.html.twig') }}
+                    <!-- Ajoutez d'autres liens ici selon vos besoins -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
