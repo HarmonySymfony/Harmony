@@ -31,31 +31,34 @@
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3 mb-sm-0">
 									{{ form_widget(form.nom)}}
-									{{ form_errors(form.nom)}}
+		<span style="color: red;">{{ form_errors(form.nom) }}</span>
 								</div>
 								<div class="col-sm-6">
 									{{ form_widget(form.description)}}
-									{{ form_errors(form.description)}}
+									<span style="color: red;">{{ form_errors(form.description)}}</span>
 								</div>
 							</div>
 							<div class="form-group">
 								{{ form_widget(form.dateEvent)}}
-								{{ form_errors(form.dateEvent)}}
+									<span style="color: red;">{{ form_errors(form.dateEvent)}}</span>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3 mb-sm-0">
 									{{ form_widget(form.adress)}}
-									{{ form_errors(form.adress)}}
+								<span style="color: red;">{{ form_errors(form.adress)}}</span>
+
 								</div>
 								<div class="col-sm-6">
 									{{ form_widget(form.prix)}}
-									{{ form_errors(form.prix)}}
+								<span style="color: red;">{{ form_errors(form.prix)}}</span>
+
 								</div>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3 mb-sm-0">
-									{{ form_widget(form.placeDispo)}}
-									{{ form_errors(form.placeDispo)}}
+									{{ form_widget(form.placeDispo)}}  
+									<span style="color: red;">{{ form_errors(form.placeDispo)}}</span>
+
 								</div>
 
 							</div>

@@ -60,6 +60,8 @@ class Evenement
     private ?int $placeDispo = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable : true)]
+    // #[Assert\NotNull(message :"can not be null ")]
+    // #[Assert\GreaterThanOrEqual(value: "today", message: "Date must be today or in the future.")]
     private ?\DateTimeInterface $dateEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'idevent', targetEntity: Reservation::class)]

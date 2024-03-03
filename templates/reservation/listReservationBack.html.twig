@@ -1,0 +1,54 @@
+{% extends 'baseBack.html.twig' %}
+{% block content %}
+
+    <div class="page-header">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"> All Reservations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">list Reservation</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="row grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">List reservations</h4>
+
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Nombre de place</th>
+                                        <th>Prix Total</th>
+                                        <th>Image de l'evenement reservé</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for l in reservations %}
+                                        <tr>
+                                            <td>{{ l.idevent.nom }}</td>
+                                            <td> {{ l.nbrplace }} </td>
+                                            <td>{{ l.idevent.prix * l.nbrplace  }} DT </td>
+                                            <td><img src=" {{ asset('Uploads/Image/' ~ l.idevent.image) }}" class="img-lg" "></td>
+                                            {% if l.approuve ==1 %}
+                                                <td style="background-color: #0b2e13">Approved</td>
+                                            {% elseif l.approuve==0 %}
+                                                <td><label class="badge badge-light"><a href="{{ url('approuverReservation',{'id':l.id}) }}">Approve</a></label></td>
+                                            {% endif %}
+
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+{% endblock %}

@@ -2,54 +2,54 @@
  
  {% extends 'baseBack.html.twig' %}
 {% block content %}
-  <div class="page-header">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Reservation By Event</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">list Reservation For this event</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="row grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">List Event</h4>
-
-                            </p>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+  <section id="reservation" class="reservation">
+    <div class="container-fluid">
+        <div class="page-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Reservation By Event</a></li>
+                    {# <li class="breadcrumb-item active" aria-current="page">{% for l in events %} List Reservation For {{ l.nom }}{% endfor %}</li> #}
+                </ol>
+            </nav>
+        </div>
+        <div class="row grid-margin stretch-card">
+            <div class="col-xl-12 col-lg-12 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">List Event</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
                                         <th>Event</th>
                                         <th>Nombre de place</th>
                                         <th>Prix Total</th>
-                                        <th>Image de l'evenement reservé</th>
+                                        <th>Image de l'événement réservé</th>
                                         <th>State</th>
-
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     {% for l in reservations %}
-                                        <tr>
-                                            <td>{{ l.idevent.nom }}</td>
-                                            <td> {{ l.nbrplace }} </td>
-                                            <td>{{ l.idevent.prix * l.nbrplace  }} DT </td>
-                                            <td><img src=" {{ asset('Uploads/Image/' ~ l.idevent.image) }}" class="img-lg" "></td>
-
-                                            {% if l.approuve ==1 %}
-                                               <td style="background-color: #0b2e13">Approved</td>
-                                            {% elseif l.approuve==0 %}
-                                                <td style="background-color:red">Pending</td>
-                                            {% endif %}
-
-
-
-                                        </tr>
+                                    <tr>
+                                        <td>{{ l.idevent.nom }}</td>
+                                        <td>{{ l.nbrplace }}</td>
+                                        <td>{{ l.idevent.prix * l.nbrplace }} DT</td>
+                                        <td><img src="{{ asset('Uploads/Image/' ~ l.idevent.image) }}" height="80" width="80" class="img-lg"></td>
+                                        {% if l.approuve == 1 %}
+                                        <td style="background-color: #0b2e13">Approved</td>
+                                        {% elseif l.approuve == 0 %}
+                                        <td style="background-color: red">Pending</td>
+                                        {% endif %}
+                                    </tr>
                                     {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
                 {% endblock %}

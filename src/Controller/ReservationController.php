@@ -33,7 +33,7 @@ class ReservationController extends AbstractController
 
 
 
-   
+
     /**
      * @Route("/reserverEvent/{id}", name="reserverEvent")
      */
@@ -75,11 +75,16 @@ class ReservationController extends AbstractController
     /**
      * @Route("/listreservation/{id}", name="afficherReservation")
      */
-    public function listReservationByEvent($id, EntityManagerInterface $entityManager){
-        $event=$entityManager->getRepository(Evenement::class)->find($id);
-        $listReservation=$entityManager->getRepository(Reservation::class)->findBy(array('idevent'=>$event));
-        return $this->render('reservation/listReservation.html.twig',array('reservations'=>$listReservation));
+    public function listReservationByEvent($id, EntityManagerInterface $entityManager)
+    {
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+        $listReservation = $entityManager->getRepository(Reservation::class)->findBy(array('idevent' => $event));
+        $listEventsBack = $entityManager->getRepository(Evenement::class)->findAll();
 
+        return $this->render('reservation/listReservation.html.twig', [
+            'reservations' => $listReservation,
+            'events' => $listEventsBack,
+        ]);
     }
 
 
@@ -88,15 +93,15 @@ class ReservationController extends AbstractController
 
 
 
-    // /**
-    //  * @Route("/listreser", name="listReservation")
-    //  */
-    // public function listReservation(){
-    //     $listReservation=$this->getDoctrine()->getRepository(Reservation::class)->findAll();
+    /**
+     * @Route("/listreser", name="listReservationBack")
+     */
+    public function listReservation(EntityManagerInterface $entityManager)
+    {
+        $listReservation = $entityManager->getRepository(Reservation::class)->findAll();
 
-    //     return $this->render('event/listReser.html.twig',array('reservations'=>$listReservation));
-
-    // }
+        return $this->render('reservation/listReservationBack.html.twig', array('reservations' => $listReservation));
+    }
 
 
 
