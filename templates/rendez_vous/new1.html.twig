@@ -1,4 +1,4 @@
-{% extends 'base.backoffice.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block body %}
     <style>
         .custom-form-container {
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary " ">{{ button_label|default('Save') }}</button>
+            <button class="btn btn-outline-primary btn-sm">{{ button_label|default('Save') }}</button>
 
             {{ form_end(form) }}
 

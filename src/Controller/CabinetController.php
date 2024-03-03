@@ -38,6 +38,7 @@ class CabinetController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($cabinet);
             $entityManager->flush();
+            flash()->addSuccess('Votre  cabinet est ajouté avec succés');
 
             return $this->redirectToRoute('app_cabinet_liste', [], Response::HTTP_SEE_OTHER);
         }
@@ -84,4 +85,20 @@ class CabinetController extends AbstractController
 
         return $this->redirectToRoute('app_cabinet_liste', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/recherche1/{id}', name: 'app_recherche1', methods: ['GET'])]
+
+    public function recherche1(CabinetRepository $cabinetRepository ,Request $request ): Response
+    { 
+      // Récupérer le terme de recherche depuis la requête
+     
+      $sortField = 'nom'; // Replace 'nom' with the correct field name
+      $sortOrder = 'ASC'; // or 'DESC'
+      $searchTerm = $request->query->get('id');
+      $cabinet = $cabinetRepository->searchAndSort($searchTerm, $sortField, $sortOrder); // Appel de la méthode de recherche et de tri
+       
+      // Passez les compétitions au template Twig pour affichage
+       return $this->render('cabinet/index.html.twig', [
+        'cabinets' => $cabinet,
+    ]);}
+
 }

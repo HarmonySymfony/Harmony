@@ -26,6 +26,7 @@
                     <div class="btn-group" role="group" aria-label="Basic example">
                     <a href="{{ path('app_rendez_vous_show', {'id': rendez_vou.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-users-viewfinder"></i></a>
                     <a href="{{ path('app_rendez_vous_edit', {'id': rendez_vou.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="{{ path('rendezVous_pdf', {'id': rendez_vou.id} ) }}" class="btn btn-primary btn-sm"><i class="fa fa-file-pdf" ></i></a>
                         {{ include('rendez_vous/_delete_form.html.twig') }}
                     </div>
 
@@ -38,6 +39,16 @@
         {% endfor %}
         </tbody>
     </table>
+    
+
+
+
 
     <a href="{{ path('app_rendez_vous_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-newspaper"></i> Create new</a>
+    <a href="{{ path('app_statistics') }}" class="btn btn-primary btn-sm"><i class="fa fa-line-chart"></i> View Statistics</a>
+    
+
+    
+        </div>
 {% endblock %}
+

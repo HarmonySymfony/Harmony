@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 
+
 #[ORM\Entity(repositoryClass: CabinetRepository::class)]
 
 class Cabinet
@@ -23,6 +24,19 @@ class Cabinet
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: "L'adresse est obligatoire !")]
     private ?string $adress = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private $nom;
+    
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+    
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+        return $this;
+    }
 
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -33,9 +47,6 @@ class Cabinet
     #[Assert\NotBlank(message: " email est obligatoire !")]
     #[Assert\Email(message: " email '{{ value }}' is not a valid email !")]
     private ?string $email = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $rendezvous = null;
 
     #[ORM\ManyToOne(inversedBy: 'idC')]
     private ?RendezVous $rendezVous = null;
@@ -77,18 +88,6 @@ class Cabinet
     public function setEmail(?string $email): static
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getRendezvous(): ?string
-    {
-        return $this->rendezvous;
-    }
-
-    public function setRendezvous(?string $rendezvous): static
-    {
-        $this->rendezvous = $rendezvous;
 
         return $this;
     }

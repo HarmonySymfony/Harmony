@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
@@ -16,6 +17,29 @@ class RendezVous
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+ 
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private $imageName;
+
+    
+     #[Vich\UploadableField(mapping:"my_image", fileNameProperty:"imageName")]
+     
+    private $imageFile;
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;

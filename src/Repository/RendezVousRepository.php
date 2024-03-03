@@ -20,6 +20,31 @@ class RendezVousRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, RendezVous::class);
     }
+    public function searchAndSort($searchTerm,  $sortField, $sortOrder)
+{
+    
+    $query = $this->createQueryBuilder('r');
+   
+    if ($searchTerm) {
+        $query->andWhere($query->expr()->orX(
+            $query->expr()->like('r.nom', ':searchTerm'),
+            $query->expr()->like('r.prenom', ':searchTerm'),
+            $query->expr()->like('r.date', ':searchTerm'),
+            $query->expr()->like('r.email', ':searchTerm')
+        ))
+              ->setParameter('searchTerm', '%'.$searchTerm.'%');
+              
+    }  // Logic for search
+
+    if ($sortField) {
+        // Assuming $sortField contains the field name to sort by
+        // Assuming $sortOrder contains the sorting order (ASC or DESC)
+        $query->orderBy('r.'.$sortField, $sortOrder);
+    }  // Logic for sorting
+    return $query->getQuery()->getResult();
+}
+
+
 
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
