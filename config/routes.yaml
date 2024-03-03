@@ -1,3 +1,8 @@
 index:
   path: /
   controller: App\Controller\HelloController::index
+# config/routes.yaml
+app_rendez_vous_stats:
+    path: /rendez/vous/stats
+    controller: App\Controller\RendezVousController::stats
+    methods: ['GET']
