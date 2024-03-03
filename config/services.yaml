@@ -6,8 +6,7 @@
 parameters:
 
 services:
-    
-    Knp\Component\Pager\PaginatorInterface: '@knp_paginator'
+
 
     # default configuration for services in *this* file
     _defaults:
