@@ -52,7 +52,8 @@ class LaboratoiresController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
+    
     #[Route('/{id}', name: 'app_laboratoires_show', methods: ['GET'])]
     public function show(Laboratoires $laboratoire): Response
     {
