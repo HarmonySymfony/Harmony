@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+    <div style="padding-left: 10px;padding-top: 100px" class="container">
+
+    <h1>Détails</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id Publication</th>
+                    <td>{{ post.id }}</td>
+                </tr>
+                <tr>
+                    <th>Contenu</th>
+                    <td>{{ post.contenu }}</td>
+                </tr>
+                <tr>
+                    <th>Publiée en tant que</th>
+                    <td>
+                        {% if post.postedAs =='Anonyme' %}
+                            Anonyme
+                        {% else %}
+                            {{ post.utilisateur.nom }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>User</th>
+                    <td>
+                        {{ post.utilisateur.id }}
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date création</th>
+                    <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+
+                </tr>
+                <tr>
+                    <th>Date dernière modification</th>
+                    <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <div style="text-align: center;">
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ path('app_comments_index_F' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires</a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ path('app_posts_edit_F', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ path('app_posts_index_F') }}" class="btn btn-primary">Retour à la liste</a>
+                            </div>
+                            <div class="col">
+                                {% include 'frontoffice/posts/_delete_form.html.twig' %}
+                            </div>
+                    </div>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
