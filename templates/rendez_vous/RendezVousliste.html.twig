@@ -86,43 +86,50 @@
         <div class="container">
 
 
+            <div style="padding-left: 200px;padding-top: 200px" class="container">
+                <h1>RendezVous index</h1>
 
-            <h1>Cabinet index</h1>
-            {% for cabinet in cabinets %}
-            <form method="get" action="{{ path('app_recherche1', {'id': cabinet.adress}) }}">
-            {% endfor %}
-            <input type="text" name="id" placeholder="Rechercher...">
-             <button type ="submit"  class="btn btn-info btn-sm" >search</button>
-            </form>  
+                <div class="container">
+         {% for rendez_vou in rendez_vouses %}
+        <form method="get" action="{{ path('app_recherche', {'id': rendez_vou.nom}) }}">
+        {% endfor %}
+        <input type="text" name="id" placeholder="Rechercher...">
+        <button type ="submit"  class="btn btn-info btn-sm" >search</button>
+       </form>  
+          </div>
+               
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Adress</th>
-                    <th>Horaires</th>
-                    <th>Email</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for cabinet in cabinets %}
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>{{ cabinet.id }}</td>
-                        <td>{{ cabinet.adress }}</td>
-                        <td>{{ cabinet.horaires }}</td>
-                        <td>{{ cabinet.email }}</td>
-              <td>
-    <a href="{{ path('app_rendez_vous_liste')}}" class="btn btn-outline-primary ">RDV</a>
-              </td>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date</th>
+                        <th>Email</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="6">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for rendez_vou in rendez_vouses %}
+                        <tr>
+                            <td>{{ rendez_vou.id }}</td>
+                            <td>{{ rendez_vou.nom }}</td>
+                            <td>{{ rendez_vou.prenom }}</td>
+                            <td>{{ rendez_vou.date }}</td>
+                            <td>{{ rendez_vou.email }}</td>
 
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('app_rendez_vous_new1') }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-newspaper"></i> Create new</a>
+            </div>
+            
+         
 
 
         </div>

@@ -2,18 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Cabinet;
+use App\Entity\RendezVous;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CabinetType extends AbstractType
+class RendezVousType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('adress')
-            ->add('horaires')
+            ->add('nom')
+            ->add('prenom')
+            ->add('date')
             ->add('email')
         ;
     }
@@ -21,7 +22,7 @@ class CabinetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Cabinet::class,
+            'data_class' => RendezVous::class,
         ]);
     }
 }
