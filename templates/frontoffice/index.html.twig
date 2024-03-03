@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     {% if app.user %}
         <div style="padding-top: 200px" class="container">
             <h1>Welcome, {{ app.user.nom ?? 'User' }} {{ app.user.prenom ?? '' }}!</h1>
@@ -31,4 +32,5 @@
             </ul>
         </div>
     {% endif %}
+
 {% endblock %}
