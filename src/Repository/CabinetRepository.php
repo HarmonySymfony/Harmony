@@ -20,7 +20,30 @@ class CabinetRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Cabinet::class);
     }
-
+    public function searchAndSort($searchTerm,  $sortField, $sortOrder)
+    {
+        
+        $query = $this->createQueryBuilder('r');
+       
+        if ($searchTerm) {
+            $query->andWhere($query->expr()->orX(
+                $query->expr()->like('r.adress', ':searchTerm'),
+                $query->expr()->like('r.horaires', ':searchTerm'), // Utilisez 'horaires' au lieu de 'Horaires'
+                $query->expr()->like('r.email', ':searchTerm'),  // Utilisez 'email' au lieu de 'Email'
+            ))
+                  ->setParameter('searchTerm', '%'.$searchTerm.'%');
+                  
+        }  // Logic for search
+    
+        if ($sortField) {
+            // Assuming $sortField contains the field name to sort by
+            // Assuming $sortOrder contains the sorting order (ASC or DESC)
+            $query->orderBy('r.'.$sortField, $sortOrder);
+        }  // Logic for sorting
+        return $query->getQuery()->getResult();
+    }
+    
+ 
 //    /**
 //     * @return Cabinet[] Returns an array of Cabinet objects
 //     */

@@ -15,6 +15,7 @@
     <link href={{asset('assetfront/vendor/remixicon/remixicon.css')}} rel="stylesheet">
     <link href={{asset('assetfront/vendor/swiper/swiper-bundle.min.css')}} rel="stylesheet">
     <link href={{asset('assetfront/css/style.css')}} rel="stylesheet">
+    <link href={{ asset('assetfront/css/recherchecomp.css') }} rel="stylesheet">
 
 </head>
 
@@ -87,6 +88,12 @@
 
 
             <h1>Cabinet index</h1>
+            {% for cabinet in cabinets %}
+            <form method="get" action="{{ path('app_recherche1', {'id': cabinet.adress}) }}">
+            {% endfor %}
+            <input type="text" name="id" placeholder="Rechercher...">
+             <button type ="submit"  class="btn btn-info btn-sm" >search</button>
+            </form>  
 
             <table class="table">
                 <thead>

@@ -15,6 +15,7 @@
     <link href={{asset('assetfront/vendor/remixicon/remixicon.css')}} rel="stylesheet">
     <link href={{asset('assetfront/vendor/swiper/swiper-bundle.min.css')}} rel="stylesheet">
     <link href={{asset('assetfront/css/style.css')}} rel="stylesheet">
+    <link href={{ asset('assetfront/css/recherchecomp.css') }} rel="stylesheet">
 
 </head>
 
@@ -88,6 +89,15 @@
             <div style="padding-left: 200px;padding-top: 200px" class="container">
                 <h1>RendezVous index</h1>
 
+                <div class="container">
+         {% for rendez_vou in rendez_vouses %}
+        <form method="get" action="{{ path('app_recherche', {'id': rendez_vou.nom}) }}">
+        {% endfor %}
+        <input type="text" name="id" placeholder="Rechercher...">
+        <button type ="submit"  class="btn btn-info btn-sm" >search</button>
+       </form>  
+          </div>
+               
 
                 <table class="table">
                     <thead>
@@ -116,8 +126,10 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <a href="{{ path('app_rendez_vous_new1') }}" class="btn btn-outline-primary btn-sm"><i class="fa fa-newspaper"></i> Create new</a>
             </div>
-
+            
+         
 
 
         </div>
