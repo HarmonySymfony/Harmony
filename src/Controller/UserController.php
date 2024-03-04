@@ -24,8 +24,10 @@ class UserController extends AbstractController
     #[Route('/backoffice', name: 'app_utilisateur_backoffice_dashboard', methods: ['GET'])]
     public function backoffice_dashboard(UtilisateurRepository $utilisateurRepository): Response
     {
+
         return $this->render('backoffice/user/index.html.twig', [
             'utilisateurs' => $utilisateurRepository->findAll(),
+
         ]);
     }
 
