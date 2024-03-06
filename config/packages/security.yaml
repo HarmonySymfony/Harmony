@@ -40,6 +40,16 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/backoffice/, roles: ADMIN }
+        - { path: ^/home/, roles: PATIENT }
+        - { path: ^/doctor/, roles: DOCTOR }
+        - { path: ^/pharmacie/, roles: HARMACIE }
+        - { path: ^/laboratoire/, roles: LABORATOIRE }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: PATIENT }
+        - { path: ^/admin/user/\d+/ban, roles: [ ADMIN ] }
+        - { path: ^/admin/user/\d+/unban, roles: [ ADMIN ] }
 
 when@test:
     security:
