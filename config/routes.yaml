@@ -6,3 +6,11 @@ app_rendez_vous_stats:
     path: /rendez/vous/stats
     controller: App\Controller\RendezVousController::stats
     methods: ['GET']
+analyse_pdf:
+    path: /pdf
+    controller: App\Controller\AnalyseController::pdf
+# config/routes.yaml
+analyse_detail:
+    path: '/analyse/{id}'
+    controller: 'App\Controller\AnalyseController::show'
+

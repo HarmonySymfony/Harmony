@@ -10,10 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 #[Route('/laboratoires')]
 class LaboratoiresController extends AbstractController
-{
+{   private $paginator;
+
+    public function __construct(PaginatorInterface $paginator)
+    {
+        $this->paginator = $paginator;
+    }
+
     #[Route('/', name: 'app_laboratoires_index', methods: ['GET'])]
     public function index(LaboratoiresRepository $laboratoiresRepository): Response
     {
@@ -24,12 +32,15 @@ class LaboratoiresController extends AbstractController
 
     
     #[Route('/front', name: 'app_laboratoires_front_index', methods: ['GET'])]
-    public function labofront(LaboratoiresRepository $laboratoiresRepository): Response
+    public function labofront(LaboratoiresRepository $laboratoiresRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('frontoffice/laboratoires/index.html.twig', [
-            'laboratoires' => $laboratoiresRepository->findAll(),
-        ]);
-    }
+    $laboratoires = $laboratoiresRepository->findAll();
+
+    return $this->render('frontoffice/laboratoires/index.html.twig', [
+        'laboratoires' => $laboratoires,
+        
+    ]);
+}
 
 
 
@@ -58,6 +69,13 @@ class LaboratoiresController extends AbstractController
     public function show(Laboratoires $laboratoire): Response
     {
         return $this->render('backoffice/laboratoires/show.html.twig', [
+            'laboratoire' => $laboratoire,
+        ]);
+    }
+    #[Route('/{id}/front', name: 'app_laboratoires_show-front', methods: ['GET'])]
+    public function showFront(Laboratoires $laboratoire): Response
+    {
+        return $this->render('frontoffice/laboratoires/show.html.twig', [
             'laboratoire' => $laboratoire,
         ]);
     }
