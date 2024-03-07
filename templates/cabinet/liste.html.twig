@@ -1,0 +1,45 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+ <div class="container">
+
+                <h1>Liste Cabinets</h1>
+
+                <table class="table table-sm">
+                    <thead class="table-secondary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Adress</th>
+                        <th>Horaires</th>
+                        <th>Email</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cabinet in cabinets %}
+                        <tr>
+                            <td>{{ cabinet.id }}</td>
+                            <td>{{ cabinet.adress }}</td>
+                            <td>{{ cabinet.horaires }}</td>
+                            <td>{{ cabinet.email }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{ path('app_cabinet_show', {'id': cabinet.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-users-viewfinder"></i></a>
+                                <a href="{{ path('app_rendez_vous_index') }}" class="btn btn-primary btn-sm"><i class="fa fa-calendar"></i></a>
+                                <a href="{{ path('app_cabinet_edit', {'id': cabinet.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> </a>
+                                    {{ include('cabinet/_delete_form.html.twig') }}
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_cabinet_new') }}" class="btn btn-primary btn-sm"><i class="fa fa-newspaper"></i> Create new</a>
+                
+{% endblock %}

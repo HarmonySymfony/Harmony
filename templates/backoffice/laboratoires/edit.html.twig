@@ -1,0 +1,14 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+
+    <h1>Edit Laboratoires</h1>
+
+    {{ include('backoffice/laboratoires/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_laboratoires_index') }}">back to list</a>
+
+    {{ include('backoffice/laboratoires/_delete_form.html.twig') }}
+
+
+{% endblock %}
