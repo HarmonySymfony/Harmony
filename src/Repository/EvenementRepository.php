@@ -29,6 +29,17 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    public function findByKeyword($keyword)
+{
+    return $this->createQueryBuilder('p')
+        ->where('p.description LIKE :keyword')
+        ->orWhere('p.nom  LIKE :keyword')
+        ->setParameter('keyword', '%' . $keyword . '%')
+        ->getQuery()
+        ->getResult();
+}
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

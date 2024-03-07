@@ -2,11 +2,24 @@
 
 
 {% block content %}
+
+
+
 	<title>Evenement</title>
 	<h1>{{ evenement.nom }}</h1>
+<head>
 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
 
-	<section id="about" class="about">
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+</body>
+<div id="bigContainer" class="nk-main">
+
+	<section id="about" class="about faq section-bg">
 		<div class="container-fluid">
 
 			<div class="row">
@@ -26,7 +39,7 @@
 						<h4 class="title">
 							<a href="#">Localisation</a>
 						</h4>
-						<p class="description">{{ evenement.adress }}</p>
+						<p class="description">{{ evenement.adresse }}</p>
 					</div>
 
 					<div class="icon-box">
@@ -52,7 +65,7 @@
 						<form method="post" action="{{ path('reserverEvent', {'id': evenement.id}) }}" class="nk-form" novalidate="novalidate">
 							<div class="row sm-gap vertical-gap align-items-center justify-content-center">
 								<div class="text-center icon-box col-md-4">
-									<input type="number" class="form-control required" id="nbrplace" name="nbrplace" placeholder="Nombre de tickets">
+									<input type="number" class="form-control required" id="nbrplace" name="nbrplace" placeholder="Nombre de tickets" min="1">
 								</div>
 							</br>
 						</br>
@@ -62,9 +75,173 @@
 						</div>
 					</div>
 				</form>
+				{% if error %}
+				<div class="alert alert-danger" role="alert">
+				{{error}}
+				</div>
+				{%endif%}
+
+				
 			</section>
+			
+{# <div class="section-title text-center">
+          <h2>Trouvez la meilleure route !!</h2>
+			<div id='map' style='width: 700px; height: 600px;' ></div>
+			</div> #}
+			<div class="section-title text-center">
+    <h2>Trouvez la meilleure route !!</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div id="map" style="width: 700px; height: 600px;"></div>
+        </div>
+    </div>
+</div>
 		</div>
 	</div>
 
 
-</div></section>{% endblock %}
+</div>
+
+
+
+<section id="testimonials" class="testimonials faq section-bg">
+    <div class="container" >
+        <div class="testimonials-slider swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" data-aos="fade-up" data-aos-delay="100">
+		<h3 class="comments-title">Reviews</h3>
+    {% if evenement.commentEvents|length > 0 %}
+            <div class="swiper-wrapper">
+                {% for comment in evenement.commentEvents %}
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="" class="testimonial-img" alt="">
+                                <h3>aaaaaaaaaaaaaaa</h3>
+                                <h4>aaaaaaaaaaa</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    {{ comment.content }}
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+				{% else %}
+        <p class="no-comments">No reviews yet.</p>
+    {% endif %}
+            </div>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+        </div>
+		<div class="row g-4">
+    {{ form_start(commentForm, {'attr': {'class': 'comment-form'}}) }}
+    
+ 
+    <div class="col-lg-12">
+        <div class="border-bottom rounded my-4">
+            {{ form_widget(commentForm.content, {'attr': {'class': 'form-control border-0', 'placeholder': 'Your Review *'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between py-3 mb-5">
+       
+            <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Post Comment</button>
+        </div>
+    </div>
+    
+    {{ form_end(commentForm) }}
+</div> 
+    </div>
+	
+</section>
+
+
+
+<script>
+                    const accessToken = 'pk.eyJ1Ijoid2FkaWlqaGluYW91aSIsImEiOiJja21zOGIyazAwZmNnMnBzMXA0dThnMGw0In0.RF1XVjqiuBbXV4HOcNLzKw'
+                    mapboxgl.accessToken = accessToken;
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v8',
+                        center: [10.81,36.27],
+                        zoom: 7.1
+                    });
+                    var nav = new mapboxgl.NavigationControl({
+                        showCompass:true,
+                        showZoom:true,
+                        visualizePitch:true
+                    });
+                    map.addControl(nav, 'bottom-right');
+                    map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('bigContainer')}));
+
+
+                    const geoLocation = new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                            enableHighAccuracy: true
+                        },
+                        trackUserLocation: true
+                    })
+                    map.addControl(geoLocation);
+
+                    /**
+                     * Deal with markers
+                     */
+
+                    var marker = new mapboxgl.Marker({
+                        color: "#ff0000",
+                        draggable: false
+                    }).setLngLat([{{ evenement.latitude }}, {{ evenement.longitude }}])
+                        .addTo(map);
+
+                    /**
+                     *  Deal with directions
+                     */
+
+                    var mDirections = new MapboxDirections({
+                        accessToken: accessToken,
+                        unit: 'metric',
+                        profile: 'mapbox/driving',
+                        interactive: false,
+
+                    });
+
+                    this.map.addControl(mDirections,'top-left');
+
+                    geoLocation.on('geolocate', ()=> {
+                        //Get the updated user location, this returns a javascript object.
+                        var userlocation = geoLocation._lastKnownPosition;
+
+                        //Your work here - Get coordinates like so
+                        var lat = userlocation.coords.latitude;
+                        console.log('lat: ',lat);
+                        var lng = userlocation.coords.longitude;
+                        console.log('lng: ',lng);
+
+
+                        this.mDirections.setOrigin([lng,lat]);
+                        this.mDirections.setDestination([{{ evenement.latitude }}, {{ evenement.longitude }}]);
+                    });
+
+
+                    map.on('load', function () {
+                        geoLocation.trigger();
+                    });
+
+
+
+
+                    </script>
+					<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var nbrPlaceInput = document.getElementById('nbrplace');
+    if (nbrPlaceInput) {
+        nbrPlaceInput.addEventListener('input', function(e) {
+            if (this.value < 1) {
+                this.value = '';
+            }
+        });
+    }
+});
+</script>
+					</div>
+{% endblock %}

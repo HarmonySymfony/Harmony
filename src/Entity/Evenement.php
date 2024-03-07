@@ -42,9 +42,7 @@ class Evenement
     )]
     private ?float $prix = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Veuillez entrer l'adress !")]
-    private ?string $adress = null;
+    
 
     #[ORM\Column( nullable: true)]
     // #[Assert\NotBlank(message: "Veuillez entrer la longitude !")]
@@ -70,9 +68,20 @@ class Evenement
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $adresse = null;
+
+    #[ORM\OneToMany(mappedBy: 'eventComment', targetEntity: CommentEvent::class)]
+    private Collection $commentEvents;
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Rating::class)]
+    private Collection $ratings;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->commentEvents = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -127,17 +136,7 @@ class Evenement
         return $this;
     }
 
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
 
-    public function setAdress(string $adress): static
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
 
     public function getLongitude(): ?float
     {
@@ -240,6 +239,78 @@ class Evenement
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): static
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentEvent>
+     */
+    public function getCommentEvents(): Collection
+    {
+        return $this->commentEvents;
+    }
+
+    public function addCommentEvent(CommentEvent $commentEvent): static
+    {
+        if (!$this->commentEvents->contains($commentEvent)) {
+            $this->commentEvents->add($commentEvent);
+            $commentEvent->setEventComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentEvent(CommentEvent $commentEvent): static
+    {
+        if ($this->commentEvents->removeElement($commentEvent)) {
+            // set the owning side to null (unless already changed)
+            if ($commentEvent->getEventComment() === $this) {
+                $commentEvent->setEventComment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rating>
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): static
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings->add($rating);
+            $rating->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): static
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getEvent() === $this) {
+                $rating->setEvent(null);
+            }
+        }
 
         return $this;
     }

@@ -43,12 +43,12 @@ class EvenementType extends AbstractType
                     'class'=> 'form-control'
                 ]
             ])
-            ->add('adress', TextType::class, [
-                'attr'=> [
-                    'placeholder' =>'Adresse évènement',
-                    'class'=> 'form-control'
-                ]
-            ])
+            // ->add('adresse', TextType::class, [
+            //     'attr'=> [
+            //         'placeholder' =>'Adresse évènement',
+            //         'class'=> 'form-control'
+            //     ]
+            // ])
             // ->add('longitude')
             // ->add('latitude')
             ->add('placeDispo', TextType::class, [

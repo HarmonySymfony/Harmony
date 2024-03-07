@@ -1,0 +1,27 @@
+{% if pageCount > 1 %}
+    <div class="pagination d-flex justify-content-center mt-5">
+        {% if first is defined %}
+            <a href="{{ path(route, query|merge({'page': first})) }}" class="rounded">First</a>
+        {% endif %}
+
+        {% if previous is defined %}
+            <a href="{{ path(route, query|merge({'page': previous})) }}" class="rounded">Previous</a>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <a href="{{ path(route, query|merge({'page': page})) }}" class="rounded">{{ page }}</a>
+            {% else %}
+                <a href="#" class="active rounded">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <a href="{{ path(route, query|merge({'page': next})) }}" class="rounded">Next</a>
+        {% endif %}
+
+        {% if last is defined %}
+            <a href="{{ path(route, query|merge({'page': last})) }}" class="rounded">Last</a>
+        {% endif %}
+    </div>
+{% endif %}
