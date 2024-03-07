@@ -64,7 +64,7 @@ class CommentsController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_comments_index',  ['postId' => $postId], Response::HTTP_SEE_OTHER);
         }
 
         // Pass the postId parameter to the template when rendering
@@ -167,7 +167,7 @@ class CommentsController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comments_index_F', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_comments_index_F',  ['postId' => $postId], Response::HTTP_SEE_OTHER);
         }
 
         // Pass the postId parameter to the template when rendering
@@ -196,7 +196,7 @@ class CommentsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comments_index', ['postId' => $postId], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_comments_index_F', ['postId' => $postId], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('frontoffice/comments/edit.html.twig', [
