@@ -1,12 +1,90 @@
 {% extends 'base.html.twig' %}
 
+
+  
+
 {% block title %}Pharmacie index{% endblock %}
 
 {% block body %}
-    
-<div style="padding-left: 200px;padding-top: 200px" class="container">
-    <h1>Pharmacie List</h1>
-    <table class="table">
+
+    <div style="padding-left: 200px; padding-top: 200px" class="container">
+        <h1>Pharmacie List</h1>
+<input id="search-input" type="form-control" placeholder="Search...">
+<title>AJAX Search Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#search-input").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("table tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style pour la carte Google Maps */
+      #map {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 350px;  /* Ajustez la hauteur selon vos besoins */
+    width: 250px;   /* Ajustez la largeur selon vos besoins */
+    border-radius: 10px;
+}
+        #map-search-container {
+    position: absolute;
+    top: 600px;
+    left: 3%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 350px;
+    background: white; 
+    border-radius: 15px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 0.9;
+    transition: opacity 0.3s, box-shadow 0.3s;
+    animation: bounceInUp 1s ease forwards;
+}
+
+#map-search-input {
+    width: calc(100% - 20px);
+    padding: 15px;
+    border: none;
+    font-size: 20px;
+    outline: none;
+    float: left;
+    color: black;
+    background: transparent;
+}
+
+#map-search-button {
+    background-color: #007bff; /* Utilisez la nuance de bleu que vous préférez */
+    color: #fff;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 0 15px 15px 0;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+
+#map-search-button:hover {
+     background-color: #CDB38B;
+            transform: scale(1.05);
+}
+
+#map-search-container:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+}
+        </style>
+
+ <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -41,5 +119,103 @@
         </tbody>
     </table>
 <a href="{{ path('app_pharmacie_new') }}"class="btn btn-info">Create new</a>
+<div id="map-container" class="map-container">
+        <div id="map"></div>
     </div>
+
+
+<!-- Barre de recherche dans la carte -->
+    <div id="map-search-container">
+        <input type="text" id="map-search-input" placeholder="Rechercher par adress" />
+        <button id="map-search-button" onclick="searchPharmacieAdress()">Rechercher <i class="fas fa-search icon"></i></button>
+    
+    </div>
+    
+
+        <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js"
+    async defer></script>
+    
+    <script>
+        var mymap;
+
+        function initMap() {
+            var mapOptions = {
+                center: { lat: 33.8869, lng: 9.5375 },
+                zoom: 7
+            };
+
+            mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+         function updateAdress() {
+            var PharmacieSelect = document.getElementById('Pharmacie');
+            var selectedOption = PharmacieSelect.options[PharmacieSelect.selectedIndex];
+            var adress = selectedOption.getAttribute('data-adress');
+            document.getElementById('map-search-input').value = adress;
+        }
+
+        function searchPharmacieAdress() {
+            var adress = document.getElementById('map-search-input').value;
+
+            if (address.trim() !== '') {
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({ 'adress': adress }, function (results, status) {
+                    if (status === 'OK') {
+                        var location = results[0].geometry.location;
+                        mymap.setCenter(location);
+                        mymap.setZoom(12);
+                    } else {
+                        alert('La recherche d\'adress a échoué : ' + status);
+                    }
+                });
+            }
+        }
+    </script>
+
+    </div>
+
+    <div id="map-container" class="map-container">
+        <div id="map"></div>
+    </div>
+
+
+<!-- Barre de recherche dans la carte -->
+    <div id="map-search-container">
+        <input type="text" id="map-search-input" placeholder="Rechercher par adress" />
+        <button id="map-search-button" onclick="searchPharmacieAdress()">Rechercher <i class="fas fa-search icon"></i></button>
+    </div>
+
+        <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.6/mapsJavaScriptAPI.js"
+    async defer></script>
+    
+    <script>
+        var mymap;
+
+        function initMap() {
+            var mapOptions = {
+                center: { lat: 33.8869, lng: 9.5375 },
+                zoom: 7
+            };
+
+            mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+
+        function searchPharmacieAdress() {
+            var adress = document.getElementById('map-search-input').value;
+
+            if (address.trim() !== '') {
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({ 'adress': adress }, function (results, status) {
+                    if (status === 'OK') {
+                        var location = results[0].geometry.location;
+                        mymap.setCenter(location);
+                        mymap.setZoom(12);
+                    } else {
+                        alert('La recherche d\'adress a échoué : ' + status);
+                    }
+                });
+            }
+        }
+    </script>
 {% endblock %}
