@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div style="padding-top: 200px" class="container">
+        <h1>Laboratoires index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Emplacement</th>
+                
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for laboratoire in laboratoires %}
+                <tr>
+                    <td>{{ laboratoire.nom }}</td>
+                    <td>{{ laboratoire.emplacement }}</td>
+                    
+                    <td>
+                        {# <a href="{{ path('app_laboratoires_show', {'id': laboratoire.id}) }}" class="btn btn-primary">Show</a> #}
+                        {# <a href="{{ path('app_laboratoires_edit', {'id': laboratoire.id}) }}" class="btn btn-secondary">Edit</a> #}
+                        {# {{ include('frontoffice/laboratoires/_delete_form.html.twig') }} #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {# <a href="{{ path('app_laboratoires_new') }}" class="btn btn-success">Create new</a> #}
+
+    </div>
+
+{% endblock %}

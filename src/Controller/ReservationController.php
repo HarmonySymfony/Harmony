@@ -10,6 +10,8 @@ use App\Repository\RatingRepository;
 use phpDocumentor\Reflection\Types\Array_;
 use phpDocumentor\Reflection\Types\False_;
 use ProxyManager\Exception\ExceptionInterface;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,7 +102,7 @@ public function reserverEvent(Request $req, $id, EntityManagerInterface $entityM
                 $entityManager->persist($reservation);
                 $entityManager->flush();
                 return $this->redirectToRoute('app_evenement_show', ['id' => $id]);
-            } catch (ExceptionInterface $e) {
+            } catch (FileNotFoundException $e) {
             }
         } else {
             $error = "le nombre de ticket est plus grand que le nombre de places";

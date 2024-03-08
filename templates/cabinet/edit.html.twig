@@ -1,0 +1,88 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+
+
+    <style>
+        .custom-form-container {
+            background-color: #b3dcb0;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .label-and-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-label {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .error-container {
+            color: red;
+            font-size: 14px;
+            /* autres styles CSS personnalisés */
+        }
+
+    </style>
+    <section class="breadcrumbs">
+    <div class="container">
+
+
+    <h1>Create new Cabinet</h1>
+
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}} )}}
+
+
+    <div class="form-group">
+        <div class="label-and-input">
+            {{ form_label(form.adress, 'adress :') }}
+            {{ form_widget(form.adress) }}
+        </div>
+
+        <div class="error-container">
+            {{ form_errors(form.adress) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="label-and-input">
+            {{ form_label(form.horaires, 'horaires :', {'label_attr': {'class': 'custom-label'}}) }}
+            {{ form_widget(form.horaires) }}
+        </div>
+
+        <div class="error-container">
+            {{ form_errors(form.horaires) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="label-and-input">
+            {{ form_label(form.email, 'email :', {'label_attr': {'class': 'custom-label'}}) }}
+            {{ form_widget(form.email) }}
+        </div>
+
+        <div class="error-container">
+            {{ form_errors(form.email) }}
+        </div>
+    </div>
+
+
+    {{ include('cabinet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cabinet_liste') }}" class="btn btn-primary btn-sm ">back to list</a>
+
+
+    {{ include('cabinet/_delete_form.html.twig') }}
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.backoffice.html.twig' %}
+{% block body %}
+    <style>
+        .custom-form-container {
+            background-color: #b3dcb0;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .label-and-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-label {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .error-container {
+            color: red;
+            font-size: 14px;
+            /* autres styles CSS personnalisés */
+        }
+
+    </style>
+    <section class="breadcrumbs">
+        <div class="container">
+
+
+            <h1>New Rendez-Vous</h1>
+
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}} )}}
+
+
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.nom, 'nom :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.nom) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.nom) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.prenom, 'prenom :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.prenom) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.prenom) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.date, 'date :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.date) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.date) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label-and-input">
+                    {{ form_label(form.email, 'email :', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(form.email) }}
+                </div>
+
+                <div class="error-container">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+
+            <button class="btn btn-primary " ">{{ button_label|default('Save') }}</button>
+
+            {{ form_end(form) }}
+
+
+
+        </div>
+    </section><!-- End Breadcrumbs Section -->
+{% endblock %}

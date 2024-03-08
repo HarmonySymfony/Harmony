@@ -1,0 +1,63 @@
+.dashboard-link {
+    text-decoration: none; /* Remove default underline */
+  }
+  
+  #dashboard-button {
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+  
+  #dashboard-button:hover {
+    transform: scale(1.1); /* Zoom in by 10% */
+  }
+  
+  .dashboard-link:hover #dashboard-button {
+    transform: scale(1.1); /* Zoom in by 10% */
+  }
+  
+  .dashboard-link:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+/* CSS for Symfony form */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
