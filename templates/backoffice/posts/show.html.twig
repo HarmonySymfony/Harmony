@@ -1,4 +1,10 @@
 {% extends 'base.backoffice.html.twig' %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block title %}Posts{% endblock %}
 
@@ -44,6 +50,36 @@
                     <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
 
                 </tr>
+                <tr>
+                    <th>Likes</th>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                {{ post.likedBy|length }}
+                            </div>
+                            <div class="col">
+                                <form action="{{ path('app_posts_like', {'id': post.id}) }}" method="post">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i>Like</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Dislikes</th>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                {{ post.dislikedBy|length }}
+                            </div>
+                            <div class="col">
+                                 <form action="{{ path('app_posts_dislike', {'id': post.id}) }}" method="post">
+                                    <button type="submit" class="btn btn-secondary"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
@@ -54,7 +90,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <a href="{{ path('app_comments_index' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires</a>
+                                <a href="{{ path('app_comments_index' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires ({{ post.getComments()|length }}) </a>
                             </div>
                             <div class="col">
                                 <a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>

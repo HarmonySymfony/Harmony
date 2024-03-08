@@ -42,7 +42,36 @@
                 <tr>
                     <th>Date dernière modification</th>
                     <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
-
+                </tr>
+                <tr>
+                    <th>Likes</th>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                {{ post.likedBy|length }}
+                            </div>
+                            <div class="col">
+                                <form action="{{ path('app_posts_like_F', {'id': post.id}) }}" method="post">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i>Like</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Dislikes</th>
+                    <td>
+                        <div class="row">
+                            <div class="col">
+                                {{ post.dislikedBy|length }}
+                            </div>
+                            <div class="col">
+                                <form action="{{ path('app_posts_dislike_F', {'id': post.id}) }}" method="post">
+                                    <button type="submit" class="btn btn-secondary"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -53,7 +82,7 @@
                     <div style="text-align: center;">
                         <div class="row">
                             <div class="col">
-                                <a href="{{ path('app_comments_index_F' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires</a>
+                                <a href="{{ path('app_comments_index_F' , {'postId': post.id}) }}" class="btn btn-success">Afficher commentaires ({{ post.getComments()|length }})</a>
                             </div>
                             <div class="col">
                                 <a href="{{ path('app_posts_edit_F', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a>
@@ -64,8 +93,8 @@
                             <div class="col">
                                 {% include 'frontoffice/posts/_delete_form.html.twig' %}
                             </div>
+                        </div>
                     </div>
-
                 </tr>
             </tbody>
         </table>
