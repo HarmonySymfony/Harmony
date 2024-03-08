@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\CommentEvent;
 use App\Entity\Evenement;
+use App\Entity\CommentEvent;
 use App\Form\EvenementType;
 use App\Form\CommentFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\EvenementRepository;
 use App\Repository\RatingRepository;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

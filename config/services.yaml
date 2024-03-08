@@ -24,6 +24,7 @@ services:
 
     # config/services.yaml
 
+    Knp\Component\Pager\PaginatorInterface: '@knp_paginator'
 
    
 

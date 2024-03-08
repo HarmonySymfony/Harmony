@@ -199,8 +199,8 @@ public function approuverReservation(int $id, EntityManagerInterface $entityMana
 
     // Send email notification
     $email = (new TemplatedEmail())
-        ->from('pidev0420@gmail.com') // Change this to your admin email address
-        ->to('wadiijhinaoui9@gmail.com') // Change this to your email address
+        ->from('pidev0420@gmail.com') //connecteduser
+        ->to('amriraed826@gmail.com') // userreservationid
         ->subject('Reservation Approved')
         ->htmlTemplate('reservation_approved.html.twig')
         ->context([
