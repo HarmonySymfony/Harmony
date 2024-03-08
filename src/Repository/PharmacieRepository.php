@@ -21,6 +21,7 @@ class PharmacieRepository extends ServiceEntityRepository
         parent::__construct($registry, Pharmacie::class);
     }
 
+    
 //    /**
 //     * @return Pharmacie[] Returns an array of Pharmacie objects
 //     */
