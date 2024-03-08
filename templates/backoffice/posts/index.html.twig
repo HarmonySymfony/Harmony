@@ -4,41 +4,161 @@
 
 {% block body %}
     <div style="padding: 50px;">
-        <h1>Liste des publications</h1>
+        <h1>Stats des publications</h1>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID publication</th>
-                <th>Publié par</th>
-                <th>Publication</th>
-                <th>Date de Publication</th>
-                <th>Date de dernière modification</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for post in posts %}
-                <tr>
-                    <td>{{ post.id }}</td>
-                    <td>{{ post.postedAs }}</td>
-                    <td style="width: 500px; word-wrap: break-word; white-space: pre-wrap;">{{ post.contenu }}</td>
-                    <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
-                    <td><a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
-                    <td><a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
-                    <td>{{ include('backoffice/posts/_delete_form.html.twig') }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4">No records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <!-- Load the AJAX API -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawCharts);
 
-        <div style="text-align: center;">
-            <a href="{{ path('app_posts_new') }}" class="btn btn-success">Publier une nouvelle question</a>
+            function drawCharts() {
+                drawUserRolePieChart();
+                drawPostDateLineChart();
+            }
+
+            function drawUserRolePieChart() {
+                // Initialize an empty array to store role and post count data
+                var userData = [];
+
+                // Iterate over the posts array to extract role and count data
+                {% set roleCount = {} %}
+                {% for post in posts %}
+                {% set role = post.utilisateur.role %}
+                {% if roleCount[role] is not defined %}
+                {% set roleCount = roleCount|merge({(role): 1}) %}
+                {% else %}
+                {% set roleCount = roleCount|merge({(role): roleCount[role] + 1}) %}
+                {% endif %}
+                {% endfor %}
+
+                // Convert the roleCount object to an array of objects
+                {% for role, count in roleCount %}
+                userData.push({ role: '{{ role }}', posts: {{ count }} });
+                {% endfor %}
+
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Role');
+                data.addColumn('number', 'Posts');
+
+                // Add rows from the user data
+                for (var i = 0; i < userData.length; i++) {
+                    data.addRow([userData[i].role, userData[i].posts]);
+                }
+
+                // Set chart options
+                var options = {
+                    'title': 'Posts by User Roles',
+                    'width': 600,
+                    'height': 400
+                };
+
+                // Instantiate and draw the chart
+                var chart = new google.visualization.PieChart(document.getElementById('user_role_chart_div'));
+                chart.draw(data, options);
+            }
+
+            function drawPostDateLineChart() {
+                // Initialize an empty array to store date creation data
+                var dateData = [];
+
+                // Iterate over the posts array to extract date creation data
+                {% set dateCount = {} %}
+                {% for post in posts %}
+                {% set date = post.dateCreation|date('Y-m-d') %}
+                {% if dateCount[date] is not defined %}
+                {% set dateCount = dateCount|merge({(date): 1}) %}
+                {% else %}
+                {% set dateCount = dateCount|merge({(date): dateCount[date] + 1}) %}
+                {% endif %}
+                {% endfor %}
+
+                // Convert the dateCount object to an array of objects
+                {% for date, count in dateCount %}
+                dateData.push({ date: '{{ date }}', count: {{ count }} });
+                {% endfor %}
+
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'Number of Posts');
+
+                // Add rows from the date data
+                for (var i = 0; i < dateData.length; i++) {
+                    data.addRow([dateData[i].date, dateData[i].count]);
+                }
+
+                // Set chart options
+                var options = {
+                    'title': 'Number of Posts by Date Creation',
+                    'width': 600,
+                    'height': 400
+                };
+
+                // Instantiate and draw the chart
+                var chart = new google.visualization.LineChart(document.getElementById('post_date_chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+
+        <!-- Divs that will hold the charts -->
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div id="user_role_chart_div" style="flex: 1; margin-right: 20px;"></div>
+            <div id="post_date_chart_div" style="flex: 1;"></div>
         </div>
+    </div>
+
+    <h1>Liste des publications</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID publication</th>
+            <th>Publié par</th>
+            <th>Publication</th>
+            <th>Date de Publication</th>
+            <th>Date de dernière modification</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.postedAs }}</td>
+                <td style="width: 500px; word-wrap: break-word; white-space: pre-wrap;">{{ post.contenu }}</td>
+                <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="row">
+                        <form action="{{ path('app_posts_like', {'id': post.id}) }}" method="post">
+                            {{ post.likedBy|length }} <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="row">
+                        <form action="{{ path('app_posts_dislike', {'id': post.id}) }}" method="post">
+                            {{ post.dislikedBy|length }} <button type="submit" class="btn btn-secondary"><i class="fas fa-thumbs-down"></i></button>
+                        </form>
+                    </div>
+                </td>
+                <td><a href="{{ path('app_posts_show', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
+                <td><a href="{{ path('app_posts_edit', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
+                <td>{{ include('backoffice/posts/_delete_form.html.twig') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center;">
+        <a href="{{ path('app_posts_new') }}" class="btn btn-success">Publier une nouvelle question</a>
     </div>
 {% endblock %}

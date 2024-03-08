@@ -29,7 +29,7 @@ class PostsType extends AbstractType
             ->add('postedAs', ChoiceType::class, [
                 'label' => 'Publier en tant que',
                 'choices' => [
-                    $user->getPrenom() => $user->getPrenom(),
+                    $user->getNom() => $user->getNom(),
                     'Anonyme' => 'Anonyme',
                 ],
                 'expanded' => true,
@@ -37,7 +37,7 @@ class PostsType extends AbstractType
                 'choice_attr' => function($choice, $key, $value) {
                     return ['style' => 'margin-left: 50px; margin-right: 10px'];
                 },
-                'data' => $user->getPrenom(), // Preselect the user's first name
+                'data' => $user->getNom(), // Preselect the user's first name
             ])
 
 

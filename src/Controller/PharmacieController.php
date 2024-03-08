@@ -143,4 +143,5 @@ class PharmacieController extends AbstractController
 
         return $this->redirectToRoute('app_pharmacie_backoffice_index', [], Response::HTTP_SEE_OTHER);
     }
+   
 }

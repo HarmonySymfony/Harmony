@@ -35,22 +35,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      */
-    #[Route('/testemail', name: 'test_email')]
-    public function testEmailSending(MailerInterface $mailer)
-    {
-        $email = (new TemplatedEmail())
-            ->from(new Address('hwita32@gmail.com', 'idriss'))
-            ->to('testingsymfonyemail1@gmail.com')
-            ->subject('Test Email')
-            ->htmlTemplate('reset_password/check_email.html.twig')
-            ->context([
-                'variable' => 'value',
-            ]);
 
-        $mailer->send($email);
-
-        return new Response('Test email sent successfully.');
-    }
     #[Route('', name: 'app_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
@@ -174,7 +159,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('idrissahnoun@gmail.com', 'Security'))
+            ->from(new Address('idris.sahnoun@esprit.tn', 'Security'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')

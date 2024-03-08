@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre application sa7tek</title>
+    <style>
+        body {
+            background-color: #e6d0f2;
+            font-family: Arial, sans-serif;
+            color: #3f32a6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .row {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #2d143d;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto; /* Pour pousser le footer en bas de la page */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #2d143d;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bienvenue dans votre application sa7tek</h1>
+
+    <div class="content">
+        <div class="row">
+            <h2>Anlyse {{ analyse.id}}</h2>
+            <p><strong>type:</strong> {{ analyse.type }}</p>
+            <p><strong>prix:</strong> {{ analyse.prix }}</p>
+
+            
+        </div>
+
+        <!-- Ajoutez plus de contenu ici -->
+    </div>
+
+    <footer>
+        sa7tek &copy; Your Website 2022
+    </footer>
+
+    <img src="{{ qrCodeDataUri }}" alt="QR Code">
+
+</body>
+
+</html>

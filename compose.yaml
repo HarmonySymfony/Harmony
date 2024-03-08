@@ -1,21 +1,55 @@
-version: '3'
-
+version: "3.8"
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
+  # Mysql database container
+  mysql_db:
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: harmony_db
+      MYSQL_USER: harmony
+      MYSQL_PASSWORD: harmony
+    ports:
+      - 3306:3306
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - db_data:/var/lib/mysql
+    networks:
+      - harmony_network
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql_db
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql_db
+    networks:
+      - harmony_network
+
+  www:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: harmony_project
+    ports:
+      - "8080:8000"
+    environment:
+      DATABASE_URL: "mysql://harmony:harmony@mysql_db:3306/harmony_db"
+    volumes:
+      - ./docker/php/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www
+    restart: always
+    depends_on:
+      - mysql_db
+    networks:
+      - harmony_network
+
+networks:
+  harmony_network:
 
 volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
+  db_data:

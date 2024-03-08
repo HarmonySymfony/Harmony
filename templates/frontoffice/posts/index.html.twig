@@ -14,6 +14,8 @@
                 <th>Publication</th>
                 <th>Date de Publication</th>
                 <th>Date de dernière modification</th>
+                <th>Likes</th>
+                <th>Dislikes</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -25,6 +27,23 @@
                     <td style="width: 500px; word-wrap: break-word; white-space: pre-wrap;">{{ post.contenu }}</td>
                     <td>{{ post.dateCreation ? post.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ post.lastModification ? post.lastModification|date('Y-m-d H:i:s') : '' }}</td>
+
+                    <td>
+                        <div class="row">
+                            <form action="{{ path('app_posts_like_F', {'id': post.id}) }}" method="post">
+                                {{ post.likedBy|length }} <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                            </form>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="row">
+                            <form action="{{ path('app_posts_dislike_F', {'id': post.id}) }}" method="post">
+                                {{ post.dislikedBy|length }} <button type="submit" class="btn btn-secondary"><i class="fas fa-thumbs-down"></i></button>
+                            </form>
+                        </div>
+                    </td>
+
                     <td><a href="{{ path('app_posts_show_F', {'id': post.id}) }}" class="btn btn-primary">Détails</a></td>
                     <td><a href="{{ path('app_posts_edit_F', {'id': post.id}) }}" class="btn btn-secondary">Modifier</a></td>
                     <td>{{ include('frontoffice/posts/_delete_form.html.twig') }}</td>

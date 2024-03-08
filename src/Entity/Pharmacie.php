@@ -32,25 +32,6 @@ class Pharmacie
     #[Assert\NotBlank(message:"Le type ne peut pas être vide.")]
     private ?string $type = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pharmacies')]
-    private ?Medicament $idMedicament = null;
-    private $medicaments;
-
-    public function __construct()
-    {
-        $this->medicaments = new ArrayCollection();
-    }
-
-    // ...
-
-    /**
-     * @return Collection|Medicament[]
-     */
-    public function getMedicaments(): Collection
-    {
-        return $this->medicaments ?: new ArrayCollection();
-    }
-
 
 
 
@@ -108,42 +89,4 @@ class Pharmacie
         return $this;
     }
 
-    /**
-     * @return Collection<int, TableStocks>
-     */
-    public function getTableStocks(): Collection
-    {
-        return $this->tableStocks;
-    }
-
-    public function addTableStock(TableStocks $tableStock): static
-    {
-        if (!$this->tableStocks->contains($tableStock)) {
-            $this->tableStocks->add($tableStock);
-            $tableStock->addIdP($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTableStock(TableStocks $tableStock): static
-    {
-        if ($this->tableStocks->removeElement($tableStock)) {
-            $tableStock->removeIdP($this);
-        }
-
-        return $this;
-    }
-
-    public function getIdMedicament(): ?Medicament
-    {
-        return $this->idMedicament;
-    }
-
-    public function setIdMedicament(?Medicament $idMedicament): static
-    {
-        $this->idMedicament = $idMedicament;
-
-        return $this;
-    }
 }
