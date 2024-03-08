@@ -1,0 +1,36 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block body %}
+    <h1>Statistics</h1>
+    <p>Total RendezVous: {{ totalRendezVous }}</p>
+
+    <canvas id="rendezVousChart" width="400" height="200"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('rendezVousChart').getContext('2d');
+        var rendezVousData = {{ rendezVousData|json_encode|raw }};
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Rendez-vous par mois',
+                    data: rendezVousData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

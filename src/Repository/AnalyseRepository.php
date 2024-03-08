@@ -21,6 +21,22 @@ class AnalyseRepository extends ServiceEntityRepository
         parent::__construct($registry, Analyse::class);
     }
 
+
+
+    public function findLaboById($id): ?string
+{
+    // Récupérez l'entité Analyse correspondant à l'ID donné
+    $analyse = $this->find($id);
+
+    // Vérifiez si une entité Analyse a été trouvée
+    if (!$analyse) {
+        return null;
+    }
+
+    // Renvoie le nom de l'entité Analyse
+    return $analyse->getLaboratoire()->getId();
+}
+
 //    /**
 //     * @return Analyse[] Returns an array of Analyse objects
 //     */

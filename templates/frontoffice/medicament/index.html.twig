@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medicament index{% endblock %}
+
+{% block body %}
+    
+    <div style="padding-left: 200px;padding-top: 200px" class="container">
+<h1>Medicament List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reference</th>
+                <th>Stock</th>
+                <th>Disponibilite</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medicament in medicaments %}
+            <tr>
+                <td>{{ medicament.id }}</td>
+                <td>{{ medicament.reference }}</td>
+                <td>{{ medicament.stock }}</td>
+                <td>{{ medicament.disponibilite }}</td>
+                <td>{{ medicament.description }}</td>
+                <td>{{ medicament.prix }}</td>
+                <td>
+                    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}"class="btn btn-success">edit</a>
+                    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}"class="btn btn-primary">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    <a href="{{ path('app_medicament_new') }}"class="btn btn-info">Create new</a>
+                    <a href="{{ path('app_pharmacie_index') }}"class="btn btn-warning">Back To Pharmacie</a>
+
+    
+    </div>
+{% endblock %}

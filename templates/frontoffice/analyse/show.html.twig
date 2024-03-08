@@ -3,8 +3,18 @@
 {% block title %}Analyse{% endblock %}
 
 {% block body %}
-    <h1>Analyse</h1>
+       <center>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1>Analyse</h1>
     <table class="table">
         <tbody>
             <tr>
@@ -22,9 +32,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_analyse_index') }}">back to list</a>
+    <a href="{{ path('app_analyse_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_analyse_edit', {'id': analyse.id}) }}">edit</a>
+    <a href="{{ path('mahmoud_pdf', {'id': analyse.id}) }}" class="btn btn-primary">PDF</a>
+        </center>
 
-    {{ include('analyse/_delete_form.html.twig') }}
+    <!-- Ce lien redirige vers l'action de votre contrôleur qui génère le PDF pour cette analyse -->
+
 {% endblock %}

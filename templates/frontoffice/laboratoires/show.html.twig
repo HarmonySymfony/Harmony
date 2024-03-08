@@ -1,14 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+</br>
+</br>
+</br></br></br></br></br></br></br></br></br></br></br></br></br>
+<h1>Laboratoires</h1>
 
-    <h1>Edit Laboratoires</h1>
+<table class="table">
+    <tbody>
+    
+    <tr>
+        <th>Nom</th>
+        <td>{{ laboratoire.nom }}</td>
+    </tr>
+    <tr>
+        <th>Emplacement</th>
+        <td>{{ laboratoire.emplacement }}</td>
+    </tr>
+   
+    </tbody>
+</table>
 
-    {{ include('backoffice/laboratoires/_form.html.twig', {'button_label': 'Update'}) }}
+<a href="{{ path('app_laboratoires_front_index') }}">back to list</a>
 
-    <a href="{{ path('app_laboratoires_index') }}">back to list</a>
 
-    {{ include('backoffice/laboratoires/_delete_form.html.twig') }}
 
 
 {% endblock %}
