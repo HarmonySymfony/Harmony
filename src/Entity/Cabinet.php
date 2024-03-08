@@ -41,6 +41,10 @@ class Cabinet
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: "L'horaire de réservation est obligatoire !")]
+    #[Assert\Regex(
+        pattern: '/^([01]\d|2[0-3]):([0-5]\d)$/', 
+        message: "L'heure doit être au format HH:MM"
+    )]
 
     private ?string $horaires = null;
     #[ORM\Column(length: 255, nullable: true)]
