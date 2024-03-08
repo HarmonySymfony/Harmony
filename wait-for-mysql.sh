@@ -17,5 +17,5 @@ until mysql_ready; do
     sleep 1
 done
 
-&2 echo "MySQL is up - executing command"
+>&2 echo "MySQL is up - executing command"
 exec $cmd
