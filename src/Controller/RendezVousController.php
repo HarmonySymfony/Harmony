@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponseResponse;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
@@ -172,7 +173,7 @@ public function statistics(RendezVousRepository $rendezVousRepository): Response
    
    
     #[Route('/rendez/vous/events', name: 'rdv_events', methods: ['GET'])]
-public function rdvEvents(RendezVousRepository $RendezVousRepository): JsonResponse
+public function rdvEvents(RendezVousRepository $RendezVousRepository): Response
 {
     $rdvs = $RendezVousRepository->findAll();
     $events = [];
