@@ -94,6 +94,66 @@ class PostsController extends AbstractController
         return $this->redirectToRoute('app_posts_index');
     }
 
+    #[Route('/backoffice/like/{id}', name: 'app_posts_like', methods: ['POST'])]
+    public function likePost(Request $request, Posts $post): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle unauthenticated users
+            // Redirect to login page or display an error message
+        }
+
+        $likedBy = $post->getLikedBy() ?? [];
+        if (!in_array($user->getId(), $likedBy, true)) {
+            $likedBy[] = $user->getId();
+            $post->setLikedBy($likedBy);
+        } else {
+            $likedBy = array_diff($likedBy, [$user->getId()]);
+            $post->setLikedBy($likedBy);
+        }
+
+        // Update the dislikes if necessary
+        $dislikedBy = $post->getDislikedBy() ?? [];
+        $dislikedBy = array_diff($dislikedBy, [$user->getId()]);
+        $post->setDislikedBy($dislikedBy);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_posts_index');
+    }
+
+
+    #[Route('/backoffice/dislike/{id}', name: 'app_posts_dislike', methods: ['POST'])]
+    public function dislikePost(Request $request, Posts $post): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle unauthenticated users
+            // Redirect to login page or display an error message
+        }
+
+        $dislikedBy = $post->getDislikedBy() ?? [];
+        if (!in_array($user->getId(), $dislikedBy, true)) {
+            $dislikedBy[] = $user->getId();
+            $post->setDislikedBy($dislikedBy);
+        } else {
+            $dislikedBy = array_diff($dislikedBy, [$user->getId()]);
+            $post->setDislikedBy($dislikedBy);
+        }
+
+        // Update the likes if necessary
+        $likedBy = $post->getLikedBy() ?? [];
+        $likedBy = array_diff($likedBy, [$user->getId()]);
+        $post->setLikedBy($likedBy);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_posts_index');
+    }
+
+
 //    --------------------------------------------------------
 //    --------------------------------------------------------
 //    --------------------------------------------------------
@@ -179,5 +239,65 @@ class PostsController extends AbstractController
         // Redirect to the index page or display an error message
         return $this->redirectToRoute('app_posts_index_F');
     }
+
+    #[Route('/frontoffice/like/{id}', name: 'app_posts_like_F', methods: ['POST'])]
+    public function likePost_F(Request $request, Posts $post): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle unauthenticated users
+            // Redirect to login page or display an error message
+        }
+
+        $likedBy = $post->getLikedBy() ?? [];
+        if (!in_array($user->getId(), $likedBy, true)) {
+            $likedBy[] = $user->getId();
+            $post->setLikedBy($likedBy);
+        } else {
+            $likedBy = array_diff($likedBy, [$user->getId()]);
+            $post->setLikedBy($likedBy);
+        }
+
+        // Update the dislikes if necessary
+        $dislikedBy = $post->getDislikedBy() ?? [];
+        $dislikedBy = array_diff($dislikedBy, [$user->getId()]);
+        $post->setDislikedBy($dislikedBy);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_posts_index_F');
+    }
+
+
+    #[Route('/frontoffice/dislike/{id}', name: 'app_posts_dislike_F', methods: ['POST'])]
+    public function dislikePost_F(Request $request, Posts $post): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            // Handle unauthenticated users
+            // Redirect to login page or display an error message
+        }
+
+        $dislikedBy = $post->getDislikedBy() ?? [];
+        if (!in_array($user->getId(), $dislikedBy, true)) {
+            $dislikedBy[] = $user->getId();
+            $post->setDislikedBy($dislikedBy);
+        } else {
+            $dislikedBy = array_diff($dislikedBy, [$user->getId()]);
+            $post->setDislikedBy($dislikedBy);
+        }
+
+        // Update the likes if necessary
+        $likedBy = $post->getLikedBy() ?? [];
+        $likedBy = array_diff($likedBy, [$user->getId()]);
+        $post->setLikedBy($likedBy);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_posts_index_F');
+    }
+
 
 }
