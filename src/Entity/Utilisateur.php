@@ -195,4 +195,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    #[ORM\Column(type: "boolean")]
+
+    private $banned = false;
+
+    public function isBanned(): bool
+    {
+        return $this->banned;
+    }
+
+    public function setBanned(bool $banned): self
+    {
+        $this->banned = $banned;
+
+        return $this;
+    }
 }

@@ -21,21 +21,23 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-    #[Route('/backoffice', name: 'app_utilisateur_backoffice_dashboard', methods: ['GET'])]
-    public function backoffice_dashboard(UtilisateurRepository $utilisateurRepository): Response
-    {
-        return $this->render('backoffice/user/index.html.twig', [
-            'utilisateurs' => $utilisateurRepository->findAll(),
-        ]);
-    }
+//    #[Route('/backoffice', name: 'app_utilisateur_backoffice_dashboard', methods: ['GET'])]
+//    public function backoffice_dashboard(UtilisateurRepository $utilisateurRepository): Response
+//    {
+//
+//        return $this->render('backoffice/user/index.html.twig', [
+//            'utilisateurs' => $utilisateurRepository->findAll(),
+//
+//        ]);
+//    }
 
-    #[Route('/backoffice/list', name: 'app_utilisateur_index', methods: ['GET'])]
-    public function indexx(UtilisateurRepository $utilisateurRepository): Response
-    {
-        return $this->render('backoffice/user/index.html.twig', [
-            'utilisateurs' => $utilisateurRepository->findAll(),
-        ]);
-    }
+//    #[Route('/backoffice/list', name: 'app_utilisateur_index', methods: ['GET'])]
+//    public function indexx(UtilisateurRepository $utilisateurRepository): Response
+//    {
+//        return $this->render('backoffice/user/index.html.twig', [
+//            'utilisateurs' => $utilisateurRepository->findAll(),
+//        ]);
+//    }
 
 
     #[Route('/backoffice/home', name: 'app_utilisateur_backoffice', methods: ['GET'])]
