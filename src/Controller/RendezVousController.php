@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponseResponse;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
@@ -171,4 +172,31 @@ public function statistics(RendezVousRepository $rendezVousRepository): Response
 
    
    
+    #[Route('/rendez/vous/events', name: 'rdv_events', methods: ['GET'])]
+public function rdvEvents(RendezVousRepository $RendezVousRepository): Response
+{
+    $rdvs = $RendezVousRepository->findAll();
+    $events = [];
+
+    foreach ($rdvs as $rdv) {
+        // Convertir la date en objet DateTime si nécessaire
+        $date = $rdv->getDate();
+        $startDateTime = new \DateTime($date);
+
+        // Formater la date et l'heure
+        $formattedDateTime = $startDateTime->format('Y-m-d\TH:i:s');
+
+        // Construire le titre incluant le prénom du rendez-vous
+        $title = 'RDV: ' . $rdv->getPrenom();
+
+        $events[] = [
+            'title' => $title,
+            'start' => $formattedDateTime
+        ];
+    }
+
+    return $this->json($events);
+}
+
+
 }

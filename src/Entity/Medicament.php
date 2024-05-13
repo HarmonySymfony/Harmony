@@ -39,37 +39,6 @@ class Medicament
     private ?string $prix = null;
 
    
-    #[ORM\ManyToMany(targetEntity:Pharmacie::class, inversedBy:"medicaments")]
-    private $pharmacies;
-
-    public function __construct()
-    {
-        $this->pharmacies = new ArrayCollection();
-    }
-
-    /**
-     * @return Collection|Pharmacie[]
-     */
-    public function getPharmacies(): Collection
-    {
-        return $this->pharmacies;
-    }
-
-    public function addPharmacie(Pharmacie $pharmacie): self
-    {
-        if (!$this->pharmacies->contains($pharmacie)) {
-            $this->pharmacies[] = $pharmacie;
-        }
-
-        return $this;
-    }
-
-    public function removePharmacie(Pharmacie $pharmacie): self
-    {
-        $this->pharmacies->removeElement($pharmacie);
-
-        return $this;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -135,29 +104,4 @@ class Medicament
         return $this;
     }
 
-    /**
-     * @return Collection<int, Pharmacie>
-     */
-
-    public function addPharmacy(Pharmacie $pharmacy): static
-    {
-        if (!$this->pharmacies->contains($pharmacy)) {
-            $this->pharmacies->add($pharmacy);
-            $pharmacy->setIdMedicament($this);
-        }
-
-        return $this;
-    }
-
-    public function removePharmacy(Pharmacie $pharmacy): static
-    {
-        if ($this->pharmacies->removeElement($pharmacy)) {
-            // set the owning side to null (unless already changed)
-            if ($pharmacy->getIdMedicament() === $this) {
-                $pharmacy->setIdMedicament(null);
-            }
-        }
-
-        return $this;
-    }
 }
