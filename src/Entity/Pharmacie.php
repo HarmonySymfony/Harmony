@@ -17,10 +17,7 @@ class Pharmacie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idU = null;
-
-    #[ORM\Column(length: 255)]
+     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom ne peut pas être vide.")]
     private ?string $nom = null;
 
@@ -41,17 +38,9 @@ class Pharmacie
         return $this->id;
     }
 
-    public function getIdU(): ?string
-    {
-        return $this->idU;
-    }
+    
 
-    public function setIdU(string $idU): static
-    {
-        $this->idU = $idU;
-
-        return $this;
-    }
+    
 
     public function getNom(): ?string
     {

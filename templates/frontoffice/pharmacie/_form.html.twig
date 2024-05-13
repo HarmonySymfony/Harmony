@@ -14,15 +14,6 @@
                     {% endif %}
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                     <div class="mb-3">
-                        {{ form_label(form.idU, 'idU', {'label_attr': {'class': 'form-label', 'style': 'color: #000;'}}) }}
-                        {{ form_widget(form.idU, {'attr': {'class': 'form-control'}}) }}
-                        {% if form_errors(form.idU) %}
-                            <div class="alert alert-danger" role="alert">
-                                {{ form_errors(form.idU) }}
-                            </div>
-                        {% endif %}
-                    </div>
 
                     <div class="mb-3">
                         {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label', 'style': 'color: #000;'}}) }}

@@ -23,7 +23,7 @@ class Medicament
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le stock ne peut pas être vide.")]
     #[Assert\Type(type:"numeric", message:"Le prix doit être un nombre.")]
-    private ?string $stock = null;
+    private ?int $stock = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"La disponibilité ne peut pas être vide.")]
@@ -36,7 +36,7 @@ class Medicament
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le prix ne peut pas être vide.")]
     #[Assert\Type(type:"numeric", message:"Le prix doit être un nombre.")]
-    private ?string $prix = null;
+    private ?int $prix = null;
 
    
     public function getId(): ?int
@@ -56,12 +56,12 @@ class Medicament
         return $this;
     }
 
-    public function getStock(): ?string
+    public function getStock(): ?int
     {
         return $this->stock;
     }
 
-    public function setStock(string $stock): static
+    public function setStock(int $stock): static
     {
         $this->stock = $stock;
 
@@ -92,12 +92,12 @@ class Medicament
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): static
+    public function setPrix(int $prix): static
     {
         $this->prix = $prix;
 

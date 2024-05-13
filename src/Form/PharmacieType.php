@@ -14,7 +14,6 @@ class PharmacieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idU')
             ->add('nom')
             ->add('adress')
             ->add('type', ChoiceType::class, [
