@@ -43,6 +43,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 10)]
     private ?string $role = null;
+    #[ORM\Column(name: "ProfilePicture", type: "blob", nullable: true)]
+private $ProfilePicture;
 
     public function getId(): ?int
     {
@@ -209,4 +211,17 @@ private ?bool $isBanned = null;
 
         return $this;
     }
+
+
+public function getProfilePicture()
+{
+    return $this->ProfilePicture;
+}
+
+public function setProfilePicture($ProfilePicture): self
+{
+    $this->ProfilePicture = $ProfilePicture;
+
+    return $this;
+}
 }

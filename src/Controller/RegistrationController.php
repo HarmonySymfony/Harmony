@@ -41,6 +41,12 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            // handle the uploaded file
+    $uploadedFile = $form['ProfilePicture']->getData();
+    if ($uploadedFile) {
+        $fileContents = file_get_contents($uploadedFile->getPathname());
+        $user->setProfilePicture($fileContents);
+    }
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -77,6 +83,12 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            // handle the uploaded file
+    $uploadedFile = $form['ProfilePicture']->getData();
+    if ($uploadedFile) {
+        $fileContents = file_get_contents($uploadedFile->getPathname());
+        $user->setProfilePicture($fileContents);
+    }
 
             $entityManager->persist($user);
             $entityManager->flush();

@@ -22,7 +22,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+
     # config/services.yaml
+    App\Twig\AppExtension:
+        tags:
+            - { name: twig.extension }
 
 
    

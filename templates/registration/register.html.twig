@@ -16,14 +16,21 @@
                     {'name': 'age', 'label': 'Age'},
                     {'name': 'role', 'label': 'Role'},
                     {'name': 'plainPassword', 'label': 'Password'},
+                        {'name': 'ProfilePicture', 'label': 'Profile Picture'},  
+
+                    
                 ] %}
                 {% for field in formFields %}
-                    <div class="form-group">
-                        <label for="{{ field.name }}" class="block text-gray-700">{{ field.label }}</label>
-                        {{ form_widget(attribute(registrationForm, field.name), {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(attribute(registrationForm, field.name)) }}
-                    </div>
-                {% endfor %}
+    <div class="form-group">
+        <label for="{{ field.name }}" class="block text-gray-700">{{ field.label }}</label>
+        {% if field.name == 'ProfilePicture' %}
+            {{ form_widget(attribute(registrationForm, field.name), {'attr': {'class': 'form-control', 'type': 'file'}}) }}
+        {% else %}
+            {{ form_widget(attribute(registrationForm, field.name), {'attr': {'class': 'form-control'}}) }}
+        {% endif %}
+        {{ form_errors(attribute(registrationForm, field.name)) }}
+    </div>
+{% endfor %}
                 <div class="form-group">
                     <div class="form-check">
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
