@@ -241,7 +241,7 @@ public function searchEvenements(Request $request, EvenementRepository $evenemen
             'nom' => $evenement->getNom(),
             'description' => $evenement->getDescription(),
             'dateEvent' => $evenement->getDateEvent() ? $evenement->getDateEvent()->format('Y-m-d') : null,
-            'image' => $evenement->getImage(), // Make sure this is the correct field name and it contains just the filename
+            'image' => $evenement->getImage(), 
         ];
     }, $evenements);
 
