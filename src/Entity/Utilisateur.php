@@ -21,16 +21,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private array $roles = [];
-
+    private ?array $roles = null;
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $isVerified = null;
+    
 
     #[ORM\Column(length: 20)]
     private ?string $nom = null;
@@ -136,17 +136,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
+    public function isVerified(): ?bool
+{
+    return $this->isVerified;
+}
 
-    public function setIsVerified(bool $isVerified): static
-    {
-        $this->isVerified = $isVerified;
+public function setVerified(?bool $verified): self
+{
+    $this->isVerified = $verified;
 
-        return $this;
-    }
+    return $this;
+}
 
     public function getNom(): ?string
     {
@@ -189,19 +189,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(?string $role): static
+{
+    $this->role = $role;
+
+    return $this;
+}
+#[ORM\Column(type: 'boolean', nullable: true)]
+private ?bool $isBanned = null;
+
+    public function isBanned(): ?bool
     {
-        $this->role = $role;
-
-        return $this;
-    }
-    #[ORM\Column(type: "boolean")]
-
-    private $banned = false;
-
-    public function isBanned(): bool
-    {
-        return $this->banned;
+        return $this->isBanned;
     }
 
     public function setBanned(bool $banned): self
