@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\ResetPasswordRequest;
 
 class UserController extends AbstractController
 {
@@ -118,16 +119,31 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_utilisateur_delete', methods: ['POST'])]
-    public function delete(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($utilisateur);
-            $entityManager->flush();
+#[Route('/{id}', name: 'app_utilisateur_delete', methods: ['POST'])]
+public function delete(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->request->get('_token'))) {
+        // Fetch all password reset requests associated with the user
+        $resetRequests = $entityManager->getRepository(ResetPasswordRequest::class)->findBy([
+            'user' => $utilisateur,
+        ]);
+
+        // Loop over the requests and remove each one
+        foreach ($resetRequests as $request) {
+            $entityManager->remove($request);
         }
 
-        return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+        // Flush the changes to the database
+        $entityManager->flush();
+
+        // Now you can safely delete the user
+        $entityManager->remove($utilisateur);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+}
+
 
 
 }
