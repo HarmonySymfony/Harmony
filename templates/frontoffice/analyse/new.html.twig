@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Analyse{% endblock %}
+
+{% block body %}
+    <h1>Create new Analyse</h1>
+
+    {{ include('analyse/_form.html.twig') }}
+
+    <a href="{{ path('app_analyse_index') }}">back to list</a>
+{% endblock %}

@@ -15,7 +15,6 @@ class CabinetType extends AbstractType
             ->add('adress')
             ->add('horaires')
             ->add('email')
-            ->add('rendezvous')
         ;
     }
 

@@ -1,0 +1,55 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Comments{% endblock %}
+
+{% block body %}
+    <h1>Comments</h1>
+    {% set url = path('app_comments_show', {'postId': postId, 'id': comment.id}) %}
+
+    <div style="padding-left: 10px;padding-top: 100px" class="container">
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ comment.id }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ comment.contenu }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ comment.dateCreation ? comment.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LastModification</th>
+                <td>{{ comment.lastModification ? comment.lastModification|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <div style="text-align: center;">
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ path('app_comments_edit', {'postId': postId, 'id': comment.id}) }}" class="btn btn-secondary">Modifier</a>
+                        </div>
+                        <div class="col">
+                            <a href="{{ path('app_comments_index', {'postId': postId}) }}" class="btn btn-primary">Retour à la liste</a>
+                        </div>
+                        <div class="col">
+                            {% include 'backoffice/comments/_delete_form.html.twig' %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

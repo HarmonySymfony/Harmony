@@ -1,0 +1,42 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto text-center">
+        <div class="pb-12">
+            <h1 class="heading">Register</h1>
+
+            {{ form_start(registrationForm) }}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {% set formFields = [
+                    {'name': 'nom', 'label': 'Nom'},
+                    {'name': 'prenom', 'label': 'Prenom'},
+                    {'name': 'email', 'label': 'Email'},
+                    {'name': 'age', 'label': 'Age'},
+                    {'name': 'role', 'label': 'Role'},
+                    {'name': 'plainPassword', 'label': 'Password'},
+                ] %}
+                {% for field in formFields %}
+                    <div class="form-group">
+                        <label for="{{ field.name }}" class="block text-gray-700">{{ field.label }}</label>
+                        {{ form_widget(attribute(registrationForm, field.name), {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(attribute(registrationForm, field.name)) }}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <div class="form-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        <label for="agreeTerms" class="form-check-label">
+                            I agree to the Terms and Conditions
+                        </label>
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

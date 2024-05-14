@@ -1,117 +1,133 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\User;
-use App\Form\UserType;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\RegistrationFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('/user')]
 class UserController extends AbstractController
 {
-    
-    #[Route('/login', name: 'app_user_login', methods: ['GET'])]
-    public function login(UserRepository $userRepository): Response
+    #[Route('/user', name: 'app_user')]
+    public function index(UtilisateurRepository $userRepository): Response
     {
-        return $this->render('backoffice/user/login.html.twig', [
-//            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/signup', name: 'app_user_signup', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('backoffice/user/signup.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/backoffice', name: 'app_user_backoffice_dashboard', methods: ['GET'])]
-    public function backoffice_dashboard(UserRepository $userRepository): Response
-    {
-        return $this->render('backoffice/user/index.html.twig', [
+        return $this->render('frontoffice/user/index.html.twig', [
+            'controller_name' => 'UserController',
             'users' => $userRepository->findAll(),
         ]);
     }
+//    #[Route('/backoffice', name: 'app_utilisateur_backoffice_dashboard', methods: ['GET'])]
+//    public function backoffice_dashboard(UtilisateurRepository $utilisateurRepository): Response
+//    {
+//
+//        return $this->render('backoffice/user/index.html.twig', [
+//            'utilisateurs' => $utilisateurRepository->findAll(),
+//
+//        ]);
+//    }
 
-    #[Route('/backoffice/list', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('backoffice/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
+//    #[Route('/backoffice/list', name: 'app_utilisateur_index', methods: ['GET'])]
+//    public function indexx(UtilisateurRepository $utilisateurRepository): Response
+//    {
+//        return $this->render('backoffice/user/index.html.twig', [
+//            'utilisateurs' => $utilisateurRepository->findAll(),
+//        ]);
+//    }
 
-    #[Route('/doctors', name: 'app_user_front_index', methods: ['GET'])]
-    public function frontoffice(UserRepository $userRepository): Response
-    {
-        return $this->render('backoffice/user/list_users_front.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/backoffice/home', name: 'app_user_backoffice', methods: ['GET'])]
-    public function backoffice(UserRepository $userRepository): Response
+    #[Route('/backoffice/home', name: 'app_utilisateur_backoffice', methods: ['GET'])]
+    public function backoffice(UtilisateurRepository $utilisateurRepository): Response
     {
         return $this->render('frontoffice/backoffice.html.twig', [
-            // 'users' => $userRepository->findAll(),
+            // 'utilisateurs' => $utilisateurRepository->findAll(),
+        ]);
+    }
+    #[Route('/patients', name: 'app_patients')]
+    public function showPatients(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $patients = $utilisateurRepository->findByRole("PATIENT");
+
+        return $this->render('backoffice/patients/index.html.twig', [
+            'patients' => $patients,
+        ]);
+    }
+    #[Route('/doctors', name: 'app_doctors')]
+    public function showDoctors(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $doctors = $utilisateurRepository->findByRole("DOCTOR");
+
+        return $this->render('backoffice/doctors/index.html.twig', [
+            'doctors' => $doctors,
+        ]);
+    }
+    #[Route('/pharmacies', name: 'app_pharmacies')]
+    public function showPharmacies(UtilisateurRepository $utilisateurRepository): Response
+    {
+        $pharmacies = $utilisateurRepository->findByRole("PHAMACIEN");
+
+        return $this->render('backoffice/pharmacies/index.html.twig', [
+            'pharmacies' => $pharmacies,
         ]);
     }
 
-
-
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+    #[Route('/{id}', name: 'app_utilisateur_show', methods: ['GET'])]
+    public function show(Utilisateur $utilisateur): Response
     {
         return $this->render('backoffice/user/show.html.twig', [
-            'user' => $user,
+            'utilisateur' => $utilisateur,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit', name: 'app_utilisateur_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backoffice/user/edit.html.twig', [
-            'user' => $user,
+            'utilisateur' => $utilisateur,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/{id}/front/edit', name: 'app_utilisateur_front_edit', methods: ['GET', 'POST'])]
+    public function editfrontoffice(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_hello', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('frontoffice/user/edit.html.twig', [
+            'utilisateur' => $utilisateur,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_utilisateur_delete', methods: ['POST'])]
+    public function delete(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($user);
+        if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($utilisateur);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+
+
 }

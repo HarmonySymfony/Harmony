@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\LaboratoiresRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LaboratoiresRepository::class)]
@@ -10,20 +13,25 @@ class Laboratoires
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private $id;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message : "le nom est obligatoire") ]  
+    #[Assert\Regex(pattern: '/^[a-zA-Z]{3,}$/', message: 'Le nom doit contenir au moins 3 caracteres alphabetiques')]
+    private $nom;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    #[Assert\NotBlank (message : "l/'emplacement est obligatoire") ]  
+    private $emplacement;
 
-    #[ORM\Column(length: 255)]
-    private ?string $emplacement = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idU = null;
+     #[ORM\OneToMany(targetEntity:Analyse::class, mappedBy:"laboratoire", orphanRemoval:true)]
+    private Collection $analyses;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idL = null;
+    public function __construct()
+    {
+        $this->analyses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -35,7 +43,7 @@ class Laboratoires
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -47,34 +55,41 @@ class Laboratoires
         return $this->emplacement;
     }
 
-    public function setEmplacement(string $emplacement): static
+    public function setEmplacement(string $emplacement): self
     {
         $this->emplacement = $emplacement;
 
         return $this;
     }
 
-    public function getIdU(): ?string
+    /**
+     * @return Collection|Analyse[]
+     */
+    public function getAnalyses(): Collection
     {
-        return $this->idU;
+        return $this->analyses;
     }
 
-    public function setIdU(string $idU): static
+    public function addAnalyse(Analyse $analyse): self
     {
-        $this->idU = $idU;
+        if (!$this->analyses->contains($analyse)) {
+            $this->analyses[] = $analyse;
+            $analyse->setLaboratoire($this);
+        }
 
         return $this;
     }
 
-    public function getIdL(): ?string
+    public function removeAnalyse(Analyse $analyse): self
     {
-        return $this->idL;
-    }
-
-    public function setIdL(string $idL): static
-    {
-        $this->idL = $idL;
+        if ($this->analyses->removeElement($analyse)) {
+            // set the owning side to null (unless already changed)
+            if ($analyse->getLaboratoire() === $this) {
+                $analyse->setLaboratoire(null);
+            }
+        }
 
         return $this;
     }
+    
 }

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <center>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<h1>Laboratoires</h1>
+
+<table class="table">
+    <tbody>
+    
+    <tr>
+        <th>Nom</th>
+        <td>{{ laboratoire.nom }}</td>
+    </tr>
+    <tr>
+        <th>Emplacement</th>
+        <td>{{ laboratoire.emplacement }}</td>
+    </tr>
+   
+    </tbody>
+</table>
+
+<a href="{{ path('app_laboratoires_front_index') }}">back to list</a>
+
+
+        </center>
+ 
+
+{% endblock %}

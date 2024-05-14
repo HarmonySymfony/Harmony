@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analyse{% endblock %}
+
+{% block body %}
+       <center>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1>Analyse</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ analyse.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ analyse.type }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ analyse.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_analyse_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('mahmoud_pdf', {'id': analyse.id}) }}" class="btn btn-primary">PDF</a>
+        </center>
+
+    <!-- Ce lien redirige vers l'action de votre contrôleur qui génère le PDF pour cette analyse -->
+
+{% endblock %}

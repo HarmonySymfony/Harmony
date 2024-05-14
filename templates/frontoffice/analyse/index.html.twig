@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="padding-top: 200px" class="container">
+        <h1>TON ANALYSE</h1>
+        <input id="search-input" type="form-control" placeholder="Rechercher...">
+        <title>AJAX Search Example</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#search-input").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("table tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th> <!-- Ajout de la colonne ID -->
+                    <th>Type</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for analyse in analyses %}
+                <tr>
+                    <td>{{ analyse.id }}</td> <!-- Affichage de l'ID -->
+                    <td>{{ analyse.type }}</td>
+                    <td>{{ analyse.prix }}</td>
+                    <td>
+                        <a href="{{ path('app_analyse_show', {'id': analyse.id}) }}" class="btn btn-primary">Voir détails</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        {% do analyses.setPageRange(3) %}
+        {{ knp_pagination_render(analyses, 'pagination.html.twig') }}
+    </div>
+{% endblock %}
