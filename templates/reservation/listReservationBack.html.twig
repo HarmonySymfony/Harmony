@@ -1,0 +1,49 @@
+
+{% extends 'baseBack.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Liste des réservations:</h2>
+        </div>
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Nombre de place</th>
+                            <th>Prix Total</th>
+                            <th>Image de l'evenement reservé</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.idevent.nom }}</td>
+                            <td>{{ reservation.nbrplace }}</td>
+                            <td>{{ reservation.idevent.prix * reservation.nbrplace }} DT</td>
+                            <td><img src="{{ asset('Uploads/Image/' ~ reservation.idevent.image) }}" height="100" width="100"></td>
+                            <td>
+                                {% if reservation.approuve == 1 %}
+                                <span style="background-color: #0b2e13; color: white;" class="badge rounded-pill">Approved</span>
+                                {% elseif reservation.approuve == 0 %}
+                                <a href="{{ url('approuverReservation', {'id': reservation.id}) }}" class="badge bg-light">Approve</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
