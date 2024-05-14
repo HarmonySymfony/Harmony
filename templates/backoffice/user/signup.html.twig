@@ -47,10 +47,10 @@
             background-color: #0056b3;
         }
     </style>
-    <div style="padding-top: 50px" class="form-container">
+    <div style="padding-top: 150px" class="form-container">
         <h1>Create new User</h1>
         <form action="{{ path('app_user_login') }}" method="post">
-            {{ form_start(form) }}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             <div class="form-group">
                 {{ form_label(form.username) }}
                 {{ form_widget(form.username) }}
