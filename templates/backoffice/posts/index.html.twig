@@ -24,12 +24,14 @@
                 // Iterate over the posts array to extract role and count data
                 {% set roleCount = {} %}
                 {% for post in posts %}
-                {% set role = post.utilisateur.role %}
-                {% if roleCount[role] is not defined %}
-                {% set roleCount = roleCount|merge({(role): 1}) %}
-                {% else %}
-                {% set roleCount = roleCount|merge({(role): roleCount[role] + 1}) %}
-                {% endif %}
+                    {% if post.utilisateur is not null %}
+                        {% set role = post.utilisateur.role %}
+                        {% if roleCount[role] is not defined %}
+                            {% set roleCount = roleCount|merge({(role): 1}) %}
+                        {% else %}
+                            {% set roleCount = roleCount|merge({(role): roleCount[role] + 1}) %}
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
 
                 // Convert the roleCount object to an array of objects

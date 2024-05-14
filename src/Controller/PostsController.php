@@ -244,10 +244,12 @@ class PostsController extends AbstractController
     public function likePost_F(Request $request, Posts $post): Response
     {
         $user = $this->getUser();
-        if (!$user) {
-            // Handle unauthenticated users
-            // Redirect to login page or display an error message
+        if ($user === null) {
+            // handle the case where there is no user
+            throw $this->createNotFoundException('No user is logged in.');
         }
+        
+        $post->setUtilisateur($user);
 
         $likedBy = $post->getLikedBy() ?? [];
         if (!in_array($user->getId(), $likedBy, true)) {

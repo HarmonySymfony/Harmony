@@ -22,15 +22,23 @@
                     <td>
                         {% if post.postedAs =='Anonyme' %}
                             Anonyme
+                        {% elseif post.postedAs =='Username'%}
+                            Username
                         {% else %}
-                            {{ post.utilisateur.nom }}
+                            {{ post.utilisateur.prenom }}
                         {% endif %}
                     </td>
                 </tr>
                 <tr>
                     <th>User</th>
                     <td>
-                        {{ post.utilisateur.id }}
+                        {# {{ post.utilisateur.id }} #}
+
+                        {% if post.utilisateur is null %}
+                            NA
+                        {% else %}
+                            {{ post.utilisateur.id }}
+                        {% endif %}
 
                     </td>
                 </tr>

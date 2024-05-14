@@ -27,12 +27,12 @@ class Comments
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $lastModification;
 
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class, cascade: ["remove"])]
-    #[ORM\JoinColumn(name: "utilisateur_id", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: "utilisateur_id", referencedColumnName: "id", nullable: true)]
     private Utilisateur $utilisateur;
 
-    #[ORM\ManyToOne(targetEntity: Posts::class, cascade: ["remove"])]
-    #[ORM\JoinColumn(name: "posts_id", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[ORM\ManyToOne(targetEntity: Posts::class)]
+    #[ORM\JoinColumn(name: "posts_id", referencedColumnName: "id")]
     private Posts $post;
 
     #[ORM\Column(length: 255)]
