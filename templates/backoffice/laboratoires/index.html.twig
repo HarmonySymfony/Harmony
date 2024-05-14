@@ -12,8 +12,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Emplacement</th>
-                <th>IdU</th>
-                <th>IdL</th>
+             
 
             </tr>
             </thead>
@@ -23,8 +22,7 @@
                     <td>{{ laboratoire.id }}</td>
                     <td>{{ laboratoire.nom }}</td>
                     <td>{{ laboratoire.emplacement }}</td>
-                    <td>{{ laboratoire.idU }}</td>
-                    <td>{{ laboratoire.idL }}</td>
+                    
                     <td>
                         <a href="{{ path('app_laboratoires_show', {'id': laboratoire.id}) }}" class="btn btn-primary">Show</a>
                         <a href="{{ path('app_laboratoires_edit', {'id': laboratoire.id}) }}" class="btn btn-secondary">Edit</a>
