@@ -1,0 +1,186 @@
+{% extends 'baseBack.html.twig' %}
+
+
+{% block content %}
+	<title>New Evenement</title>
+	{# <div class="container-fluid">
+													<h1>Create new Evénement</h1>
+													{{ form_start(form, {'attr': {'novalidate': 'novalidate' }}) }}
+													{{ form_widget(form) }}
+													<button class="btn">{{ button_label|default('Save') }}</button>
+													{{ form_end(form) }}
+											
+													<a href="{{ path('app_evenement_index') }}">Back to list</a>
+			
+											</div> #}
+
+<head>
+
+        <meta
+                name="viewport"
+                content="initial-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+
+    </head>
+	<div class="row justify-content-center">
+		<div class="col-lg-6 ">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h2 class="m-0 font-weight-bold text-primary text-center">Créer un évènement!</h2>
+				</div>
+				<div class="card-body">
+					<div class="col-lg-14">
+						<div class="p-5">
+							<div
+								class="text-center">{# <h1 class="h4 text-gray-900 mb-4">Créer un évènement!</h1> #}
+							</div>
+							{{ form_start(form, {'attr': {'novalidate': 'novalidate' }}) }}
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.nom)}}
+									<span style="color: red;">{{ form_errors(form.nom) }}</span>
+								</div>
+								<div class="col-sm-6">
+									{{ form_widget(form.description)}}
+									<span style="color: red;">{{ form_errors(form.description)}}</span>
+								</div>
+							</div>
+							<div class="form-group">
+								{{ form_widget(form.dateEvent)}}
+								<span style="color: red;">{{ form_errors(form.dateEvent)}}</span>
+							</div>
+							<div class="form-group row">
+								{# <div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.adress)}}
+									<span style="color: red;">{{ form_errors(form.adress)}}</span>
+								</div> #}
+
+								 <div id='map' style='width: 100%; height: 250px;'></div>
+                                <script>
+                                    const accessToken = 'pk.eyJ1Ijoid2FkaWlqaGluYW91aSIsImEiOiJja21zOGIyazAwZmNnMnBzMXA0dThnMGw0In0.RF1XVjqiuBbXV4HOcNLzKw'
+                                    mapboxgl.accessToken = accessToken;
+                                    let map = new mapboxgl.Map({
+                                        container: 'map',
+                                        style: 'mapbox://styles/mapbox/streets-v11',
+                                        center: [10.81,36.27],
+                                        zoom: 7.1
+                                    });
+                                    var nav = new mapboxgl.NavigationControl({
+                                        showCompass:true,
+                                        showZoom:true,
+                                        visualizePitch:true
+                                    });
+                                    map.addControl(nav, 'bottom-right');
+                                    map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('bigContainer')}), 'bottom-left');
+
+
+
+
+                                    /**
+                                     * Deal with Geocoder
+                                     */
+
+
+                                    var geocoder = new MapboxGeocoder({ // Initialize the geocoder
+                                        accessToken: accessToken, // Set the access token
+                                        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+                                        marker: false, // Do not use the default marker style
+                                        placeholder: 'Search for places in Tunisia', // Placeholder text for the search bar
+                                        //bbox: [9.5607653, 33.7931605, 9.5607653, 33.7931605], // Boundary for Tunisia
+
+                                        proximity: {
+                                            longitude: 9.5607653,
+                                            latitude: 33.7931605
+                                        } // Coordinates of Tunis
+                                    });
+
+                                    // Add the geocoder to the map
+                                    map.addControl(geocoder);
+
+
+
+                                    // After the map style has loaded on the page,
+                                    // add a source layer and default styling for a single point
+                                    map.on('load', function () {
+                                        map.addSource('single-point', {
+                                            'type': 'geojson',
+                                            'data': {
+                                                'type': 'FeatureCollection',
+                                                'features': []
+                                            }
+                                        });
+
+                                        map.addLayer({
+                                            'id': 'point',
+                                            'source': 'single-point',
+                                            'type': 'circle',
+                                            'paint': {
+                                                'circle-radius': 10,
+                                                'circle-color': '#448ee4'
+                                            }
+                                        });
+
+                                        // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
+                                        //  Add a marker at the result's coordinates
+
+                                        geocoder.on('result', function (e) {
+                                            map.getSource('single-point').setData(e.result.geometry);
+                                            let lat = e.result.center[0];
+                                            let lng = e.result.center[1];
+                                            console.log('lat: ',lat);
+                                            console.log('e: ',e);
+
+                                            document.getElementById('longitude').value = lng;
+                                            document.getElementById('latitude').value = lat;
+                                            document.getElementById('adresse').value = e.result.place_name;
+
+
+
+                                        });
+                                    });
+
+
+                                </script>
+
+
+
+  <br/> <input class="form-control" type="text" name="adresse" id="adresse" placeholder="adresse" value=""> <br/>
+                              <input class="form-control" type="text" name="longitude" id="longitude" placeholder="longitude" value=""> <br/>
+                                 <input  class="form-control" type="text" name="latitude" id="latitude" placeholder="latitude" value=""> <br/>
+								<div class="col-sm-6">
+									{{ form_widget(form.prix)}}
+									<span style="color: red;">{{ form_errors(form.prix)}}</span>
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									{{ form_widget(form.placeDispo)}}
+									<span style="color: red;">{{ form_errors(form.placeDispo)}}</span>
+
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									{{ form_widget(form.image)}}
+									{{ form_errors(form.image)}}
+								</div>
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary mr-2">Submit</button>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    EventImage_directory: '%kernel.project_dir%/public/Uploads/Image'
 services:
 
 
@@ -28,6 +28,7 @@ services:
         tags:
             - { name: twig.extension }
 
+    Knp\Component\Pager\PaginatorInterface: '@knp_paginator'
 
    
 

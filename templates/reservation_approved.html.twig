@@ -1,0 +1,11 @@
+{% block subject %}Reservation Approved{% endblock %}
+
+{% block body %}
+<p>Your reservation has been approved.</p>
+<p>Details:</p>
+<ul>
+    <li>Event: {{ reservation.idevent.nom }}</li>
+    <li>Nombre de place: {{ reservation.nbrplace }}</li>
+    <li>Prix Total: {{ reservation.idevent.prix * reservation.nbrplace }} DT</li>
+</ul>
+{% endblock %}
