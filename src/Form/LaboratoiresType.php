@@ -14,8 +14,7 @@ class LaboratoiresType extends AbstractType
         $builder
             ->add('nom')
             ->add('emplacement')
-            ->add('idU')
-            ->add('idL')
+            
         ;
     }
 
