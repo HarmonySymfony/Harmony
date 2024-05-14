@@ -7,9 +7,9 @@
         {{ include('frontoffice/user/_form.html.twig', {'button_label': 'Update'}) }}
 
         <div class="mt-4">
-            <a href="{{ path('app_utilisateur_index') }}" class="btn btn-secondary">Back to list</a>
+            <a href="{{ path('app_login') }}" class="btn btn-secondary">Back to list</a>
         </div>
 
-        {{ include('frontoffice/user/_delete_form.html.twig') }}
+        {# {{ include('frontoffice/user/_delete_form.html.twig') }} #}
     </div>
 {% endblock %}
